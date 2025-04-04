@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "lightning-hydra-boilerplate"
+version = "0.1.0"
+description = "A boilerplate for Lightning + Hydra"
+authors = ["Willy Fitra Hendria <willyfitrahendria@gmail.com>"]
+packages = [{ include = "src" }]
+
+[tool.poetry.dependencies]
+lightning = "^2.5.0"
+hydra-core = "^1.3.2"
+torch = "^2.5.1"
+omegaconf = "^2.3.0"
+optuna = "^4.2.1"
+tensorboard = "^2.12.0"
+torchvision = "^0.20.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
