@@ -1,0 +1,8 @@
+defaults:
+  - _self_
+  - model: example_model
+  - data: example_data
+  - trainer: default
+  - logger: tensorboard
+
+seed: 42

@@ -1,0 +1,3 @@
+_target_: src.data.example_data.lightning_datamodule.ExampleDataModule
+batch_size: 32
+num_workers: 4
