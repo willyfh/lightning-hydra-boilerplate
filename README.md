@@ -80,6 +80,7 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [ ] 🏆 Evaluation script
 - [ ] 🚀 Check Multi-GPU
 - [ ] 📈 MLflow and/or Wandb
+- [ ] 🔀 Pre-commit hook setup
 - [ ] ✅ Unit tests
 - [ ] 🐳 Docker support for easy deployment
 - [ ] ⚙️ Continuous Integration (CI) setup
