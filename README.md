@@ -2,7 +2,7 @@
 <h1> ⚡ Lightning-Hydra-Boilerplate </h1>
 </div>
 
-A boilerplate training framework for deep learning experiments with **PyTorch Lightning** and **Hydra**, designed for rapid prototyping, clean configuration management, and scalable research workflows.
+A project boilerplate for deep learning experiments using PyTorch Lightning and Hydra, designed for rapid prototyping, clean configuration management, and scalable research workflows.
 
 ⚠️ _This project is in its early stages and still under active development. Expect breaking changes and incomplete features._
 
