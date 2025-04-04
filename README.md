@@ -4,6 +4,8 @@
 
 A boilerplate training framework for deep learning experiments with **PyTorch Lightning** and **Hydra**, designed for rapid prototyping, clean configuration management, and scalable research workflows.
 
+⚠️ _This project is in its early stages and still under active development. Expect breaking changes and incomplete features._
+
 ## 📁 Project Structure
 
 ```plaintext
@@ -22,7 +24,7 @@ lightning-hydra-boilerplate/
 │── scripts/                   
 │   ├── train.py               # Training script
 │
-│── src/                       # Source code
+│── src/
 │   ├── data/
 │   │   ├── example_data/
 │   │   │   ├── lightning_datamodule.py  # Lightning DataModule
