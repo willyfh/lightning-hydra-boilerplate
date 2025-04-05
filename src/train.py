@@ -1,30 +1,27 @@
 import hydra
-from omegaconf import DictConfig, OmegaConf
+from omegaconf import DictConfig
 import lightning.pytorch as L
 from hydra.utils import instantiate
-
+from hydra.utils import instantiate
+from omegaconf import DictConfig
+from utils.hydra_utils import instantiate_recursively
 
 def train(cfg: DictConfig):
-
     model = instantiate(cfg.model)
     data_module = instantiate(cfg.data)
-    logger = instantiate(cfg.logger)
-
-    callbacks = []
-    if "callback" in cfg:
-        for cb_cfg in cfg.callback.values():
-            callbacks.append(instantiate(cb_cfg))
+    trainer_params = instantiate_recursively(cfg.trainer)
 
     trainer = L.Trainer(
-        max_epochs=cfg.trainer.max_epochs,
-        devices=cfg.trainer.gpus,
-        logger=logger,
-        callbacks=callbacks,
+        **trainer_params,
     )
+
+    # Start training
     trainer.fit(model, datamodule=data_module)
 
-    if not cfg.trainer.skip_test:
+    # Check if we should skip the test phase after training
+    if not cfg.skip_test:
         trainer.test(model, datamodule=data_module)
+
 
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
 def main(cfg: DictConfig):

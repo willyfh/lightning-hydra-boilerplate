@@ -1,7 +1,0 @@
-# @package callback
-early_stopping:
-  _target_: lightning.pytorch.callbacks.EarlyStopping
-  monitor: "val_loss"
-  mode: "min"
-  patience: 3
-  verbose: true
