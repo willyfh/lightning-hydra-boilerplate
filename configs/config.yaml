@@ -4,5 +4,8 @@ defaults:
   - data: example_data
   - trainer: default
   - logger: tensorboard
+  - callback:
+    - early_stopping
+    - model_checkpoint
 
 seed: 42
