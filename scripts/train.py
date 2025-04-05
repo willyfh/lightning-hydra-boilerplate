@@ -10,10 +10,16 @@ def train(cfg: DictConfig):
     data_module = instantiate(cfg.data)
     logger = instantiate(cfg.logger)
 
+    callbacks = []
+    if "callback" in cfg:
+        for cb_cfg in cfg.callback.values():
+            callbacks.append(instantiate(cb_cfg))
+
     trainer = L.Trainer(
         max_epochs=cfg.trainer.max_epochs,
         devices=cfg.trainer.gpus,
         logger=logger,
+        callbacks=callbacks,
     )
     trainer.fit(model, datamodule=data_module)
 
