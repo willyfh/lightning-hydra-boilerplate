@@ -82,6 +82,7 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [x] Poetry setup
 - [x] Configurable Callbacks (EarlyStopping, ModelCheckpoint, etc.)
 - [x] Run test after training
+- [x] Pre-commit setup
 
 ## 📝 TODO List
 
@@ -91,10 +92,8 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [ ] 🛠 Hyperparameter tuning with Optuna
 - [ ] 🚀 Check Multi-GPU
 - [ ] 📈 MLflow and/or Wandb
-- [ ] 🔀 Pre-commit hook setup
-- [ ] ✅ Unit tests
+- [ ] ✅ Unit tests + CI
 - [ ] 🐳 Docker support for easy deployment
-- [ ] ⚙️ Continuous Integration (CI) setup
 - [ ] 📂 Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
 - [ ] 📝 Add logger
 
