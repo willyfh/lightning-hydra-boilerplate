@@ -11,33 +11,31 @@ A project boilerplate for deep learning experiments using PyTorch Lightning and 
 ```plaintext
 lightning-hydra-boilerplate/
 │── configs/                  # YAML configurations for Hydra
-│   ├── data/
-│   │   ├── example_data.yaml  # Example dataset configuration
-│   ├── logger/
-│   │   ├── tensorboard.yaml   # Logger configuration
-│   ├── model/
-│   │   ├── example_model.yaml # Example model configuration
-│   ├── trainer/
-│   │   ├── default.yaml       # Default training config
-│   ├── config.yaml            # Main config file
+│   ├── data/                
+│   │   ├── example_data.yaml  
+│   ├── model/                
+│   │   ├── example_model.yaml 
+│   ├── trainer/              
+│   │   ├── default.yaml       
+│   ├── config.yaml            
 │
-│── scripts/                   
-│   ├── train.py               # Training script
+│── src/                       # Core codebase
+│   ├── data/                 
+│   │   ├── example_data/      
+│   │   │   ├── lightning_datamodule.py  
+│   │   │   ├── torch_dataset.py         
+│   ├── model/                 
+│   │   ├── example_model/    
+│   │   │   ├── lightning_module.py  
+│   │   │   ├── torch_model.py       
+│   ├── utils/                 
+│   │   ├── hydra_utils.py          
+│   ├── train.py               # Training entrypoint
 │
-│── src/
-│   ├── data/
-│   │   ├── example_data/
-│   │   │   ├── lightning_datamodule.py  # Lightning DataModule
-│   │   │   ├── torch_dataset.py         # Custom PyTorch Dataset
-│   ├── model/
-│   │   ├── example_model/
-│   │   │   ├── lightning_module.py  # PyTorch Lightning Model
-│   │   │   ├── torch_model.py       # Custom PyTorch Model
-│
-│── .gitignore
-│── LICENSE
-│── poetry.lock
-│── pyproject.toml
+│── .gitignore                 
+│── LICENSE                    
+│── poetry.lock                
+│── pyproject.toml             
 │── README.md
 ```
 
@@ -55,13 +53,13 @@ poetry install
 Run the training script with the default configurations:
 
 ```bash
- poetry run python scripts/train.py
+ poetry run python src/train.py
 ```
 
 You can override configs using Hydra, for example:
 
 ```bash
- poetry run python scripts/train.py trainer.max_epochs=10
+ poetry run python src/train.py trainer.max_epochs=10
 ```
 
 ### **3️⃣ Experiment Configuration**
@@ -84,6 +82,7 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 ## 📝 TODO List
 ⚠️ _Feel free to fork the repo, create a PR, or open an issue if you spot anything or have ideas. I’d love to hear your feedback and make this more useful for everyone!_ 
 
+- [ ] 🏆 Evaluation script
 - [ ] 🏆 Evaluation script
 - [ ] 🛠 Hyperparameter tuning with Optuna
 - [ ] 🚀 Check Multi-GPU

@@ -1,9 +1,0 @@
-# @package callback
-model_checkpoint:
-  _target_: lightning.pytorch.callbacks.ModelCheckpoint
-  dirpath: "checkpoints"
-  filename: "best-checkpoint"
-  monitor: "val_loss"
-  mode: "min"
-  save_top_k: 1
-  verbose: true

@@ -1,3 +1,18 @@
-gpus: 1
 max_epochs: 10
-skip_test: False
+devices: 1
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: "logs/"
+callbacks:
+  - _target_: lightning.pytorch.callbacks.EarlyStopping
+    monitor: "val_loss"
+    mode: "min"
+    patience: 3
+    verbose: true
+  - _target_: lightning.pytorch.callbacks.ModelCheckpoint
+    dirpath: "checkpoints"
+    filename: "best-checkpoint"
+    monitor: "val_loss"
+    mode: "min"
+    save_top_k: 1
+    verbose: true
