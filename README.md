@@ -77,13 +77,15 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [x] Basic training workflow with example model and data
 - [x] TensorBoard logging support
 - [x] Poetry setup
+- [x] Configurable Callbacks (EarlyStopping, ModelCheckpoint, etc.)
+- [x] Run test after training
+
 
 ## 📝 TODO List
 ⚠️ _Feel free to fork the repo, create a PR, or open an issue if you spot anything or have ideas. I’d love to hear your feedback and make this more useful for everyone!_ 
 
-- [ ] 🔄 Configurable Callbacks (EarlyStopping, ModelCheckpoint, etc.)
-- [ ] 🛠 Hyperparameter tuning with Optuna
 - [ ] 🏆 Evaluation script
+- [ ] 🛠 Hyperparameter tuning with Optuna
 - [ ] 🚀 Check Multi-GPU
 - [ ] 📈 MLflow and/or Wandb
 - [ ] 🔀 Pre-commit hook setup
