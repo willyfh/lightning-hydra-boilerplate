@@ -83,7 +83,6 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 ⚠️ _Feel free to fork the repo, create a PR, or open an issue if you spot anything or have ideas. I’d love to hear your feedback and make this more useful for everyone!_ 
 
 - [ ] 🏆 Evaluation script
-- [ ] 🏆 Evaluation script
 - [ ] 🛠 Hyperparameter tuning with Optuna
 - [ ] 🚀 Check Multi-GPU
 - [ ] 📈 MLflow and/or Wandb
@@ -92,6 +91,7 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [ ] 🐳 Docker support for easy deployment
 - [ ] ⚙️ Continuous Integration (CI) setup
 - [ ] 📂 Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
+- [ ] 📝 Add logger
 
 ## 📜 License
 This project is licensed under the MIT License.

@@ -20,10 +20,7 @@ def train(cfg: DictConfig):
 
     # Check if we should skip the test phase after training
     if not cfg.skip_test:
-        print("Running evaluation (test) after training...")
         trainer.test(model, datamodule=data_module)
-    else:
-        print("Skipping test phase after training.")
 
 
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
