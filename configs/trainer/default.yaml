@@ -1,2 +1,3 @@
 gpus: 1
 max_epochs: 10
+skip_test: False
