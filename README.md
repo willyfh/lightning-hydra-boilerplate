@@ -79,6 +79,8 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [x] Poetry setup
 
 ## 📝 TODO List
+Feel free to fork the repo, create a PR, or open an issue if you spot anything or have ideas. I’d love to hear your feedback and make this more useful for everyone!
+
 - [ ] 🔄 Configurable Callbacks (EarlyStopping, ModelCheckpoint, etc.)
 - [ ] 🛠 Hyperparameter tuning with Optuna
 - [ ] 🏆 Evaluation script
