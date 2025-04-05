@@ -23,6 +23,9 @@ def train(cfg: DictConfig):
     )
     trainer.fit(model, datamodule=data_module)
 
+    if not cfg.trainer.skip_test:
+        trainer.test(model, datamodule=data_module)
+
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
 def main(cfg: DictConfig):
     train(cfg)
