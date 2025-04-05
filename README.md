@@ -83,7 +83,7 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [ ] ✅ Unit tests
 - [ ] 🐳 Docker support for easy deployment
 - [ ] ⚙️ Continuous Integration (CI) setup
-- [ ] 📂 Organize `logs/` (Lightning) and `outputs/` (Hydra) properly
+- [ ] 📂 Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
 
 ## 📜 License
 This project is licensed under the MIT License.
