@@ -33,21 +33,18 @@ def evaluate(cfg: DictConfig) -> None:
     ckpt_path = cfg.ckpt_path
 
     if eval_split == "test":
-        dataloader = datamodule.test_dataloader()
+        dataset = datamodule.test_dataloader().dataset
         split_name = "Test"
+        results = trainer.test(model=model, datamodule=datamodule, ckpt_path=ckpt_path)
     elif eval_split == "val":
-        dataloader = datamodule.val_dataloader()
+        dataset = datamodule.val_dataloader().dataset
         split_name = "Validation"
-    elif eval_split == "train":
-        dataloader = datamodule.train_dataloader()
-        split_name = "Training"
+        results = trainer.validate(model=model, datamodule=datamodule, ckpt_path=ckpt_path)
     else:
         error_msg = f"Unknown eval_split: {eval_split}"
         raise ValueError(error_msg)
 
-    logging.info(f"{split_name} dataset size: {len(dataloader.dataset)}")
-    results = trainer.validate(model=model, dataloaders=dataloader, ckpt_path=ckpt_path)
-
+    logging.info(f"{split_name} dataset size: {len(dataset)}")
     logging.info(f"Evaluation results on {split_name} set:\n{results}")
 
 

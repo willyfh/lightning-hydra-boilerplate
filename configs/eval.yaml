@@ -5,7 +5,7 @@ defaults:
 
 experiment_name: "eval"
 ckpt_path: ??? # User must override this
-eval_split: "test" # one of: test, val, train
+eval_split: "test" # one of: test or val
 
 hydra:
   run:

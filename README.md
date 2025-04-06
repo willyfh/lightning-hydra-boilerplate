@@ -72,7 +72,7 @@ This will:
 
 ### **3️⃣ Evaluate a Model**
 
-If you need to run evaluation independently on a specific checkpoint and dataset split (train, val, or test), use the evaluation script:
+If you need to run evaluation independently on a specific checkpoint and dataset split (val or test), use the evaluation script:
 
 ```bash
 poetry run python src/eval.py eval_split=test ckpt_path=/path/to/checkpoint.ckpt
@@ -137,6 +137,7 @@ More info: https://hydra.cc/docs/intro/
 - [ ] MLflow and/or Wandb
 - [ ] Docker support for easy deployment
 - [ ] Make metrics configurable
+- [ ] Add task-specific examples and configs (e.g., object detection, text classification, etc.)
 
 ## 📜 License
 
