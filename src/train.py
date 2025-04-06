@@ -53,6 +53,7 @@ def train(cfg: DictConfig) -> None:
 @hydra.main(version_base=None, config_path="../configs", config_name="train")
 def main(cfg: DictConfig) -> None:
     """Main entry point, triggered by Hydra with config injection."""
+    pl.seed_everything(cfg.seed)
     setup_logger()
     train(cfg)
 
