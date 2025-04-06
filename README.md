@@ -91,6 +91,7 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [x] Setup tests
 - [x] Setup dependabot
 - [x] Add logger
+- [x] Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
 
 ## 📝 TODO List
 
@@ -99,9 +100,9 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [ ] 🏆 Evaluation script
 - [ ] 🛠 Hyperparameter tuning with Optuna
 - [ ] 🚀 Check Multi-GPU
+- [ ] ⚡ Add more Lightning Trainer features (resume, callbacks, etc.)
 - [ ] 📈 MLflow and/or Wandb
 - [ ] 🐳 Docker support for easy deployment
-- [ ] 📂 Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
 
 ## 📜 License
 
