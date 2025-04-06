@@ -10,4 +10,4 @@ experiment_name: "exp"
 
 hydra:
   run:
-    dir: "train_output/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"
+    dir: "outputs/train/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"

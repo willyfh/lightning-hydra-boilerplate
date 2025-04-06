@@ -29,19 +29,19 @@ def evaluate(cfg: DictConfig) -> None:
     trainer = pl.Trainer(**trainer_params)
     datamodule.setup()
 
-    eval_split = cfg.eval_split
+    data_split = cfg.data_split
     ckpt_path = cfg.ckpt_path
 
-    if eval_split == "test":
+    if data_split == "test":
         dataset = datamodule.test_dataloader().dataset
         split_name = "Test"
         results = trainer.test(model=model, datamodule=datamodule, ckpt_path=ckpt_path)
-    elif eval_split == "val":
+    elif data_split == "val":
         dataset = datamodule.val_dataloader().dataset
         split_name = "Validation"
         results = trainer.validate(model=model, datamodule=datamodule, ckpt_path=ckpt_path)
     else:
-        error_msg = f"Unknown eval_split: {eval_split}"
+        error_msg = f"Unknown data_split: {data_split}"
         raise ValueError(error_msg)
 
     logging.info(f"{split_name} dataset size: {len(dataset)}")
