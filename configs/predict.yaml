@@ -1,0 +1,13 @@
+defaults:
+  - model: example_model
+  - data: example_data
+  - trainer: default
+
+experiment_name: "predict"
+ckpt_path: ??? # User must override this
+data_split: "test" # one of: train, test, val, or predict
+save_format: csv # json or csv
+
+hydra:
+  run:
+    dir: "outputs/predict/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"
