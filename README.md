@@ -35,6 +35,8 @@ lightning-hydra-boilerplate/
 │   │   ├── hydra_utils.py
 │   ├── train.py               # Training entrypoint
 │
+│── tests/                     # Unit tests
+│
 │── .gitignore
 │── LICENSE
 │── poetry.lock
