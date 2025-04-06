@@ -17,14 +17,14 @@ torchvision = "^0.20.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.0"
+pytest = "^8.3.5"
+pytest-cov = "^6.1.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# RUFF CONFIGURATION                                                          #
 [tool.ruff]
 preview = true
 
@@ -162,8 +162,6 @@ max-complexity = 15
 convention = "google"
 
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# MYPY CONFIGURATION.                                                         #
 [tool.mypy]
 ignore_missing_imports = true
 show_error_codes = true
@@ -173,3 +171,21 @@ show_error_codes = true
 module = ["torch.*"]
 follow_imports = "skip"
 follow_imports_for_stubs = true
+
+
+[tool.pytest.ini_options]
+addopts = [
+  "--strict-markers",
+  "--strict-config",
+  "--showlocals",
+  "-ra",
+  "--cov=src",
+  "--cov-report=term-missing",  # Show missing lines in terminal
+  "--cov-report=xml",
+]
+testpaths = "tests"
+pythonpath = "src"
+markers = [
+  "gpu: marks tests that require GPU",
+  "cpu: marks tests that can run on CPU only (default)",
+]

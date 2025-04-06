@@ -1,5 +1,8 @@
 <div align="center">
 <h1> ⚡ Lightning-Hydra-Boilerplate </h1>
+
+[![python](https://img.shields.io/badge/python-3.9%2B-blue)]() [![pytorch](https://img.shields.io/badge/pytorch-2.0%2B-orange)]() [![Run Tests](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/pytest.yml/badge.svg)](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/pytest.yml)
+
 </div>
 
 A project boilerplate for deep learning experiments using PyTorch Lightning and Hydra, designed for rapid prototyping, clean configuration management, and scalable research workflows.
@@ -82,7 +85,8 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [x] Poetry setup
 - [x] Configurable Callbacks (EarlyStopping, ModelCheckpoint, etc.)
 - [x] Run test after training
-- [x] Pre-commit setup
+- [x] Setup pre-commit setup
+- [x] Setup tests
 
 ## 📝 TODO List
 
@@ -92,7 +96,6 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [ ] 🛠 Hyperparameter tuning with Optuna
 - [ ] 🚀 Check Multi-GPU
 - [ ] 📈 MLflow and/or Wandb
-- [ ] ✅ Unit tests + CI
 - [ ] 🐳 Docker support for easy deployment
 - [ ] 📂 Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
 - [ ] 📝 Add logger
