@@ -107,18 +107,18 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [x] Setup dependabot
 - [x] Add logger
 - [x] Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
+- [x] Evaluation script
 
 ## 📝 TODO List
 
 ⚠️ _Feel free to fork the repo, create a PR, or open an issue if you spot anything or have ideas. I’d love to hear your feedback and make this more useful for everyone!_
 
-- [ ] 🏆 Evaluation script
 - [ ] Inference script
-- [ ] 🛠 Hyperparameter tuning with Optuna
-- [ ] 🚀 Check Multi-GPU
-- [ ] ⚡ Add more Lightning Trainer features (resume, callbacks, etc.)
-- [ ] 📈 MLflow and/or Wandb
-- [ ] 🐳 Docker support for easy deployment
+- [ ] Hyperparameter tuning with Optuna
+- [ ] Check Multi-GPU
+- [ ] Add more Lightning Trainer features (resume, callbacks, etc.)
+- [ ] MLflow and/or Wandb
+- [ ] Docker support for easy deployment
 - [ ] Make metrics configurable
 
 ## 📜 License
