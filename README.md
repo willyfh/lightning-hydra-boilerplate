@@ -89,6 +89,8 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [x] Run test after training
 - [x] Setup pre-commit setup
 - [x] Setup tests
+- [x] Setup dependabot
+- [x] Add logger
 
 ## 📝 TODO List
 
@@ -100,7 +102,6 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [ ] 📈 MLflow and/or Wandb
 - [ ] 🐳 Docker support for easy deployment
 - [ ] 📂 Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
-- [ ] 📝 Add logger
 
 ## 📜 License
 
