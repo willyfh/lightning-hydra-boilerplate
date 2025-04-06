@@ -1,7 +1,7 @@
 # Copyright (c) 2025 lightning-hydra-boilerplate
 # Licensed under the MIT License.
 
-"""Hydra utilities for recursive instantiation of configuration objects."""
+"""Hydra utilities."""
 
 from collections.abc import Mapping, Sequence
 from typing import TypeAlias
