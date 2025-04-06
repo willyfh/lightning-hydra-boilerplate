@@ -1,5 +1,6 @@
 max_epochs: 10
 devices: 1
+default_root_dir: ${hydra:run.dir}
 logger:
   _target_: lightning.pytorch.loggers.TensorBoardLogger
   save_dir: "${hydra:run.dir}/logs/"

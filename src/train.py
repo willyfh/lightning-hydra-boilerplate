@@ -47,7 +47,7 @@ def train(cfg: DictConfig) -> None:
         logger.info("Test stage skipped.")
 
 
-@hydra.main(version_base=None, config_path="../configs", config_name="config")
+@hydra.main(version_base=None, config_path="../configs", config_name="train")
 def main(cfg: DictConfig) -> None:
     """Main entry point, triggered by Hydra with config injection."""
     train(cfg)
