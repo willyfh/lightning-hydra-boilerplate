@@ -75,10 +75,23 @@ This will:
 If you need to run evaluation independently on a specific checkpoint and dataset split (val or test), use the evaluation script:
 
 ```bash
-poetry run python src/eval.py eval_split=test ckpt_path=/path/to/checkpoint.ckpt
+poetry run python src/eval.py data_split=test ckpt_path=/path/to/checkpoint.ckpt
 ```
 
-### **4️⃣ Experiment Configuration**
+### **4️⃣ Predict Outputs**
+
+To generate predictions from a trained model (e.g., for submission or analysis), run the predict.py script with the path to your checkpoint:
+
+```bash
+poetry run python src/predict.py ckpt_path=/path/to/checkpoint.ckpt
+```
+
+This will:
+
+- Run inference on the prediction set (defaults to `test` set)
+- Save the results to a file (e.g., predictions.csv or predictions.json depending on `save_format`) under the Hydra run directory
+
+### **5️⃣ Experiment Configuration**
 
 All experiment settings are managed with Hydra.
 
@@ -90,26 +103,18 @@ You can modify the configs under configs/ or override them via CLI. For example:
 
 More info: https://hydra.cc/docs/intro/
 
-### **5️⃣ Outputs**
+### **6️⃣ Outputs**
 
-#### 🏋️ Training Outputs
+All run outputs are saved under the `outputs/` directory:
 
-- Training logs (via TensorBoard by default):
-  `train_output/{experiment_name}-{timestamp}/logs/`.
+```plaintext
+outputs/
+├── train/    ← training logs, checkpoints, config snapshots
+├── eval/     ← evaluation logs and results
+├── predict/  ← prediction files (e.g. .csv, .json)
+```
 
-- Hydra configuration snapshots:
-  `train_output/{experiment_name}-{timestamp}/.hydra/`.
-
-- Checkpoints:
-  `train_output/{experiment_name}-{timestamp}/checkpoints/`.
-
-#### 📈 Evaluation Outputs
-
-- Evaluation logs (via TensorBoard by default):
-  `eval_output/{experiment_name}-{timestamp}/logs/`.
-
-- Hydra configuration snapshots:
-  `eval_output/{experiment_name}-{timestamp}/.hydra/`.
+Each run is timestamped for easy tracking and reproducibility.
 
 ## ✅ Completed Tasks
 
@@ -124,13 +129,13 @@ More info: https://hydra.cc/docs/intro/
 - [x] Setup dependabot
 - [x] Add logger
 - [x] Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
-- [x] Evaluation script
+- [x] Evaluation script (`eval.py`)
+- [x] Inference script (`predict.py`)
 
 ## 📝 TODO List
 
 ⚠️ _Feel free to fork the repo, create a PR, or open an issue if you spot anything or have ideas. I’d love to hear your feedback and make this more useful for everyone!_
 
-- [ ] Inference script
 - [ ] Hyperparameter tuning with Optuna
 - [ ] Check Multi-GPU
 - [ ] Add more Lightning Trainer features (resume, callbacks, etc.)
