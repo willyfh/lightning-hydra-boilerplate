@@ -75,14 +75,24 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 
 ### **4️⃣ Outputs**
 
-- **Training logs** (using **TensorBoard** by default) can be found in:
-  `experiment_output/{experiment_name}-{timestamp}/logs/`.
+#### Training outputs
 
-- **Hydra** stores experiment outputs, including config snapshots, in:
-  `experiment_output/{experiment_name}-{timestamp}/.hydra/`.
+- **Training logs** (using **TensorBoard** by default) can be found in:
+  `train_output/{experiment_name}-{timestamp}/logs/`.
+
+- **Hydra** stores the training config snapshots, in:
+  `train_output/{experiment_name}-{timestamp}/.hydra/`.
 
 - **Checkpoints** (including both best and last models) are saved in:
-  `experiment_output/{experiment_name}-{timestamp}/checkpoints/`.
+  `train_output/{experiment_name}-{timestamp}/checkpoints/`.
+
+#### Evaluation outputs
+
+- **Evaluation logs** (using **TensorBoard** by default) can be found in:
+  `eval_output/{experiment_name}-{timestamp}/logs/`.
+
+- **Hydra** stores evaluation config snapshots, in:
+  `eval_output/{experiment_name}-{timestamp}/.hydra/`.
 
 ## ✅ Completed Tasks
 
@@ -103,11 +113,13 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 ⚠️ _Feel free to fork the repo, create a PR, or open an issue if you spot anything or have ideas. I’d love to hear your feedback and make this more useful for everyone!_
 
 - [ ] 🏆 Evaluation script
+- [ ] Inference script
 - [ ] 🛠 Hyperparameter tuning with Optuna
 - [ ] 🚀 Check Multi-GPU
 - [ ] ⚡ Add more Lightning Trainer features (resume, callbacks, etc.)
 - [ ] 📈 MLflow and/or Wandb
 - [ ] 🐳 Docker support for easy deployment
+- [ ] Make metrics configurable
 
 ## 📜 License
 

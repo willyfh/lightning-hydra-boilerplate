@@ -1,0 +1,12 @@
+defaults:
+  - model: example_model
+  - data: example_data
+  - trainer: default
+
+experiment_name: "eval"
+ckpt_path: ??? # User must override this
+eval_split: "test" # one of: test, val, train
+
+hydra:
+  run:
+    dir: "eval_output/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"
