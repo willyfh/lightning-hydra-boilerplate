@@ -72,7 +72,7 @@ class ExampleDataModule(LightningDataModule):
 
         In this simple implementation, we use the same `test_dataset` for both testing
         and prediction purposes. This can be extended in the future to use a different
-        dataset for inference if needed.
+        dataset or unlabeled data for inference if needed.
         """
         return DataLoader(
             self.test_dataset,
