@@ -1,5 +1,4 @@
-/train_output/
-/eval_output/
+/outputs/
 /data_temp/
 
 # Byte-compiled / optimized / DLL files

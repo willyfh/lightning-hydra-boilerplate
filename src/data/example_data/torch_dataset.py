@@ -33,14 +33,14 @@ class ExampleTorchDataset(Dataset):
         """Return the number of samples in the dataset."""
         return len(self.dataset)
 
-    def __getitem__(self, idx: int) -> tuple[object, int]:
-        """Retrieve a single (image, label) pair by index.
+    def __getitem__(self, idx: int) -> tuple[int, object, int]:
+        """Retrieve a single (image, label, index) triplet by index.
 
         Args:
             idx (int): Index of the sample to retrieve.
 
         Returns:
-            Tuple[Tensor, int]: Tuple of image tensor and its corresponding label.
+            Tuple: (image, label, idx)
         """
         image, label = self.dataset[idx]
-        return image, label
+        return image, label, idx

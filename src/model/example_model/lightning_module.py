@@ -35,33 +35,33 @@ class ExampleLightningModel(LightningModule):
         """
         return self.model(x)
 
-    def training_step(self, batch: tuple[torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
+    def training_step(self, batch: tuple[torch.Tensor, torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
         """Run one training step.
 
         Args:
-            batch (tuple): A tuple of input and label tensors.
+            batch (tuple): A tuple of input, label, and index tensors.
             _ (int): Unused batch index.
 
         Returns:
             torch.Tensor: Training loss.
         """
-        x, y = batch
+        x, y, _ = batch
         logits = self.forward(x)
         loss = functional.cross_entropy(logits, y)
         self.log("train_loss", loss)
         return loss
 
-    def validation_step(self, batch: tuple[torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
+    def validation_step(self, batch: tuple[torch.Tensor, torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
         """Run one validation step.
 
         Args:
-            batch (tuple): A tuple of input and label tensors.
+            batch (tuple): A tuple of input, label, and index tensors.
             _ (int): Unused batch index.
 
         Returns:
             torch.Tensor: Validation loss.
         """
-        x, y = batch
+        x, y, _ = batch
         logits = self.forward(x)
         loss = functional.cross_entropy(logits, y)
         acc = (logits.argmax(dim=1) == y).float().mean()
@@ -69,17 +69,17 @@ class ExampleLightningModel(LightningModule):
         self.log("val_acc", acc, prog_bar=True)
         return loss
 
-    def test_step(self, batch: tuple[torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
+    def test_step(self, batch: tuple[torch.Tensor, torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
         """Evaluate the model on the test set.
 
         Args:
-            batch (tuple): A tuple of input and label tensors.
+            batch (tuple): A tuple of input, label, and index tensors.
             _ (int): Unused batch index.
 
         Returns:
             torch.Tensor: Test loss.
         """
-        x, y = batch
+        x, y, _ = batch
         logits = self.forward(x)
         loss = functional.cross_entropy(logits, y)
         acc = (logits.argmax(dim=1) == y).float().mean()
@@ -87,22 +87,23 @@ class ExampleLightningModel(LightningModule):
         self.log("test_acc", acc, prog_bar=True)
         return loss
 
-    def predict_step(self, batch: tuple[torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
+    def predict_step(self, batch: tuple[torch.Tensor, torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
         """Generate predictions for a given batch during inference.
 
         This method is used during `Trainer.predict()` to produce model outputs,
         such as logits or predicted class indices.
 
         Args:
-            batch (tuple): A tuple containing input tensors and (optionally) labels.
+            batch (tuple): A tuple of input, (optional) label, and index tensors.
             _ (int): Unused batch index.
 
         Returns:
             torch.Tensor: Model predictions (e.g., predicted class indices).
         """
-        x, _ = batch
+        x, _, idx = batch
         logits = self.forward(x)
-        return torch.argmax(logits, dim=1)
+        preds = torch.argmax(logits, dim=1)
+        return {"idx": idx, "pred": preds}
 
     def configure_optimizers(self) -> torch.optim.Optimizer:
         """Set up the optimizer.
