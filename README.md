@@ -32,7 +32,6 @@ lightning-hydra-boilerplate/
 │   │   │   ├── lightning_module.py
 │   │   │   ├── torch_model.py
 │   ├── utils/
-│   │   ├── hydra_utils.py
 │   ├── train.py               # Training entrypoint
 │
 │── tests/                     # Unit tests
@@ -74,10 +73,16 @@ You can override configs using Hydra, for example:
 All experiment settings are managed with Hydra.
 Modify `configs/config.yaml` or override via CLI. See for more details: https://hydra.cc/docs/intro/
 
-### **4️⃣ Logging**
+### **4️⃣ Outputs**
 
-- Training logs are saved using **TensorBoard** by default. Logs can be found in `logs/`.
-- Hydra stores experiment outputs, including config snapshots, in the `outputs/` directory.
+- **Training logs** (using **TensorBoard** by default) can be found in:
+  `experiment_output/{experiment_name}-{timestamp}/logs/`.
+
+- **Hydra** stores experiment outputs, including config snapshots, in:
+  `experiment_output/{experiment_name}-{timestamp}/.hydra/`.
+
+- **Checkpoints** (including both best and last models) are saved in:
+  `experiment_output/{experiment_name}-{timestamp}/checkpoints/`.
 
 ## ✅ Completed Tasks
 
@@ -91,6 +96,7 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [x] Setup tests
 - [x] Setup dependabot
 - [x] Add logger
+- [x] Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
 
 ## 📝 TODO List
 
@@ -99,9 +105,9 @@ Modify `configs/config.yaml` or override via CLI. See for more details: https://
 - [ ] 🏆 Evaluation script
 - [ ] 🛠 Hyperparameter tuning with Optuna
 - [ ] 🚀 Check Multi-GPU
+- [ ] ⚡ Add more Lightning Trainer features (resume, callbacks, etc.)
 - [ ] 📈 MLflow and/or Wandb
 - [ ] 🐳 Docker support for easy deployment
-- [ ] 📂 Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
 
 ## 📜 License
 
