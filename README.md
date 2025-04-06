@@ -22,6 +22,7 @@ lightning-hydra-boilerplate/
 │   │   ├── default.yaml
 │   ├── train.yaml
 │   ├── eval.yaml
+│   ├── predict.yaml
 │
 │── src/                       # Core codebase
 │   ├── data/
@@ -35,6 +36,7 @@ lightning-hydra-boilerplate/
 │   ├── utils/
 │   ├── train.py               # Training entrypoint
 │   ├── eval.py                # Evaluation entrypoint
+│   ├── predict.py             # Inference entrypoint (for making predictions)
 │
 │── tests/                     # Unit tests
 │
@@ -143,6 +145,7 @@ Each run is timestamped for easy tracking and reproducibility.
 - [ ] Docker support for easy deployment
 - [ ] Make metrics configurable
 - [ ] Add task-specific examples and configs (e.g., object detection, text classification, etc.)
+- [ ] Add experiment configs for reusable training/eval setups (e.g., `configs/experiments/exp1.yaml`)
 
 ## 📜 License
 
