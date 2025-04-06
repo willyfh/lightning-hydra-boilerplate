@@ -3,13 +3,15 @@
 
 """Training entry point using Hydra and PyTorch Lightning."""
 
+import logging
+
 import hydra
 import lightning.pytorch as pl
 from hydra.utils import instantiate
-from loguru import logger
 from omegaconf import DictConfig, OmegaConf
 
 from utils.hydra_utils import instantiate_recursively
+from utils.logger_utils import setup_logger
 
 
 def train(cfg: DictConfig) -> None:
@@ -18,38 +20,40 @@ def train(cfg: DictConfig) -> None:
     Args:
         cfg (DictConfig): The Hydra configuration object.
     """
-    logger.info("Using configuration:\n" + OmegaConf.to_yaml(cfg))
+    logging.info("Using configuration:\n" + OmegaConf.to_yaml(cfg))
 
     model = instantiate(cfg.model)
-    data_module = instantiate(cfg.data)
+    datamodule = instantiate(cfg.data)
     trainer_params = instantiate_recursively(cfg.trainer)
 
     # Setup the datasets
-    data_module.setup()
-    train_size = len(data_module.train_dataloader().dataset)
-    val_size = len(data_module.val_dataloader().dataset)
-    test_size = len(data_module.test_dataloader().dataset)
+    datamodule.setup()
+    train_size = len(datamodule.train_dataloader().dataset)
+    val_size = len(datamodule.val_dataloader().dataset)
+    test_size = len(datamodule.test_dataloader().dataset)
 
     # Log dataset sizes
-    logger.info(f"Training dataset size: {train_size}")
-    logger.info(f"Validation dataset size: {val_size}")
-    logger.info(f"Test dataset size: {test_size}")
+    logging.info(f"Training dataset size: {train_size}")
+    logging.info(f"Validation dataset size: {val_size}")
+    logging.info(f"Test dataset size: {test_size}")
 
     trainer = pl.Trainer(**trainer_params)
 
     # Start training
-    trainer.fit(model, datamodule=data_module)
+    trainer.fit(model, datamodule=datamodule)
 
     # Optionally run test
     if not cfg.skip_test:
-        trainer.test(model, datamodule=data_module)
+        results = trainer.test(model, datamodule=datamodule)
+        logging.info(f"Test results:\n{results}")
     else:
-        logger.info("Test stage skipped.")
+        logging.info("Test stage skipped.")
 
 
 @hydra.main(version_base=None, config_path="../configs", config_name="train")
 def main(cfg: DictConfig) -> None:
     """Main entry point, triggered by Hydra with config injection."""
+    setup_logger()
     train(cfg)
 
 
