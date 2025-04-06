@@ -2,7 +2,7 @@ max_epochs: 10
 devices: 1
 logger:
   _target_: lightning.pytorch.loggers.TensorBoardLogger
-  save_dir: "logs/"
+  save_dir: "${hydra:run.dir}/logs/"
 callbacks:
   - _target_: lightning.pytorch.callbacks.EarlyStopping
     monitor: "val_loss"
@@ -10,7 +10,7 @@ callbacks:
     patience: 3
     verbose: true
   - _target_: lightning.pytorch.callbacks.ModelCheckpoint
-    dirpath: "checkpoints"
+    dirpath: "${hydra:run.dir}/checkpoints"
     filename: "best-checkpoint"
     monitor: "val_loss"
     mode: "min"
