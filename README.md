@@ -20,7 +20,8 @@ lightning-hydra-boilerplate/
 │   │   ├── example_model.yaml
 │   ├── trainer/
 │   │   ├── default.yaml
-│   ├── config.yaml
+│   ├── train.yaml
+│   ├── eval.yaml
 │
 │── src/                       # Core codebase
 │   ├── data/
@@ -33,6 +34,7 @@ lightning-hydra-boilerplate/
 │   │   │   ├── torch_model.py
 │   ├── utils/
 │   ├── train.py               # Training entrypoint
+│   ├── eval.py                # Evaluation entrypoint
 │
 │── tests/                     # Unit tests
 │
@@ -62,36 +64,51 @@ Run the training script with the default configurations:
  poetry run python src/train.py
 ```
 
-You can override configs using Hydra, for example:
+This will:
+
+- Train the model on the training set
+- Validate during training using the validation set
+- Test the final model on the test set (unless `skip_test=true` is set)
+
+### **3️⃣ Evaluate a Model**
+
+If you need to run evaluation independently on a specific checkpoint and dataset split (train, val, or test), use the evaluation script:
+
+```bash
+poetry run python src/eval.py eval_split=test ckpt_path=/path/to/checkpoint.ckpt
+```
+
+### **4️⃣ Experiment Configuration**
+
+All experiment settings are managed with Hydra.
+
+You can modify the configs under configs/ or override them via CLI. For example:
 
 ```bash
  poetry run python src/train.py trainer.max_epochs=10
 ```
 
-### **3️⃣ Experiment Configuration**
+More info: https://hydra.cc/docs/intro/
 
-All experiment settings are managed with Hydra.
-Modify `configs/config.yaml` or override via CLI. See for more details: https://hydra.cc/docs/intro/
+### **5️⃣ Outputs**
 
-### **4️⃣ Outputs**
+#### 🏋️ Training Outputs
 
-#### Training outputs
-
-- **Training logs** (using **TensorBoard** by default) can be found in:
+- Training logs (via TensorBoard by default):
   `train_output/{experiment_name}-{timestamp}/logs/`.
 
-- **Hydra** stores the training config snapshots, in:
+- Hydra configuration snapshots:
   `train_output/{experiment_name}-{timestamp}/.hydra/`.
 
-- **Checkpoints** (including both best and last models) are saved in:
+- Checkpoints:
   `train_output/{experiment_name}-{timestamp}/checkpoints/`.
 
-#### Evaluation outputs
+#### 📈 Evaluation Outputs
 
-- **Evaluation logs** (using **TensorBoard** by default) can be found in:
+- Evaluation logs (via TensorBoard by default):
   `eval_output/{experiment_name}-{timestamp}/logs/`.
 
-- **Hydra** stores evaluation config snapshots, in:
+- Hydra configuration snapshots:
   `eval_output/{experiment_name}-{timestamp}/.hydra/`.
 
 ## ✅ Completed Tasks
