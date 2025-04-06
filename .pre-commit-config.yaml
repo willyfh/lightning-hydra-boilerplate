@@ -37,7 +37,6 @@ repos:
     hooks:
       - id: bandit
         args: ["-c", "pyproject.toml"]
-        exclude: "tests"
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1

@@ -148,7 +148,7 @@ lint.dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 target-version = "py310"
 
 # Allow imports relative to the "src" and "tests" directories.
-src = ["visualtorch", "tests"]
+src = ["src", "tests"]
 
 [tool.ruff.lint.mccabe]
 # Unlike Flake8, default to a complexity level of 10.
@@ -189,3 +189,6 @@ markers = [
   "gpu: marks tests that require GPU",
   "cpu: marks tests that can run on CPU only (default)",
 ]
+
+[tool.bandit.assert_used]
+skips = ['*_test.py', '*/test_*.py']
