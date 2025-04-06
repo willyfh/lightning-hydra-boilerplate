@@ -23,32 +23,24 @@ class ExampleDataModule(LightningDataModule):
         self.batch_size = batch_size
         self.num_workers = num_workers
 
-    def setup(self, stage: str) -> None:
-        """Prepare datasets for different stages: 'fit', 'validate', 'test', 'predict'.
+    def setup(self, stage: str | None = None) -> None:  # noqa: ARG002
+        """Prepare datasets for all splits.
 
         Args:
-            stage (str): One of 'fit', 'validate', 'test', or 'predict'.
+            stage (str | None): One of None, 'fit', 'validate', 'test', or 'predict'.
+                This argument is unused in this implementation, but you could use it to conditionally
+                load specific datasets based on the stage of the model training or evaluation. For example:
+                - 'fit': Load the training and validation datasets.
+                - 'validate': Optionally, load validation data only.
+                - 'test': Load test dataset for evaluation.
+                - 'predict': Load prediction dataset for inference.
         """
-        if stage == "fit":
-            full_train_dataset = ExampleTorchDataset(train=True)
-            self.train_dataset, self.val_dataset = random_split(
-                full_train_dataset,
-                [55000, 5000],
-            )
-
-        elif stage == "validate":
-            if not hasattr(self, "val_dataset"):
-                full_train_dataset = ExampleTorchDataset(train=True)
-                _, self.val_dataset = random_split(
-                    full_train_dataset,
-                    [55000, 5000],
-                )
-
-        elif stage == "test":
-            self.test_dataset = ExampleTorchDataset(train=False)
-
-        elif stage == "predict":
-            self.predict_dataset = ExampleTorchDataset(train=False)
+        full_train_dataset = ExampleTorchDataset(train=True)
+        self.train_dataset, self.val_dataset = random_split(
+            full_train_dataset,
+            [55000, 5000],
+        )
+        self.test_dataset = ExampleTorchDataset(train=False)
 
     def train_dataloader(self) -> DataLoader:
         """Return the training data loader."""
@@ -76,9 +68,14 @@ class ExampleDataModule(LightningDataModule):
         )
 
     def predict_dataloader(self) -> DataLoader:
-        """Return the predict data loader."""
+        """Return the data loader for making predictions.
+
+        In this simple implementation, we use the same `test_dataset` for both testing
+        and prediction purposes. This can be extended in the future to use a different
+        dataset for inference if needed.
+        """
         return DataLoader(
-            self.predict_dataset,
+            self.test_dataset,
             batch_size=self.batch_size,
             num_workers=self.num_workers,
         )
