@@ -10,7 +10,7 @@ from utils.hydra_utils import instantiate_recursively
 
 
 class Dummy:
-    """Dummy class"""
+    """Dummy class for testing instantiation."""
 
     def __init__(self, value: int) -> None:
         self.value = value
@@ -21,7 +21,7 @@ def basic_cfg() -> OmegaConf:
     """Basic config structure."""
     return OmegaConf.create({
         "a": {
-            "_target_": "tests.utils.test_hydra_utils.Dummy",
+            "_target_": f"{__name__}.Dummy",  # Ensures importable path
             "value": 42,
         },
         "b": "not_instantiable",
@@ -34,12 +34,12 @@ def nested_cfg() -> OmegaConf:
     return OmegaConf.create({
         "a": {
             "x": {
-                "_target_": "tests.utils.test_hydra_utils.Dummy",
+                "_target_": f"{__name__}.Dummy",
                 "value": 7,
             },
         },
         "list": [
-            {"_target_": "tests.utils.test_hydra_utils.Dummy", "value": 3},
+            {"_target_": f"{__name__}.Dummy", "value": 3},
             "static",
         ],
     })
@@ -48,7 +48,7 @@ def nested_cfg() -> OmegaConf:
 def test_basic_instantiation(basic_cfg: OmegaConf) -> None:
     """Test with no nested structure."""
     out = instantiate_recursively(basic_cfg)
-    assert type(out["a"]).__name__ == "Dummy"
+    assert isinstance(out["a"], Dummy)
     assert out["a"].value == 42
     assert out["b"] == "not_instantiable"
 
@@ -56,8 +56,8 @@ def test_basic_instantiation(basic_cfg: OmegaConf) -> None:
 def test_nested_instantiation(nested_cfg: OmegaConf) -> None:
     """Test nested structure."""
     out = instantiate_recursively(nested_cfg)
-    assert type(out["a"]["x"]).__name__ == "Dummy"
+    assert isinstance(out["a"]["x"], Dummy)
     assert out["a"]["x"].value == 7
-    assert type(out["list"][0]).__name__ == "Dummy"
+    assert isinstance(out["list"][0], Dummy)
     assert out["list"][0].value == 3
     assert out["list"][1] == "static"
