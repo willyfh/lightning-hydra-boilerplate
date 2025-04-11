@@ -3,32 +3,23 @@
 
 """Hydra utilities."""
 
-from collections.abc import Mapping, Sequence
-from typing import TypeAlias
-
 from hydra.utils import instantiate
 from omegaconf import DictConfig, ListConfig
 
-ConfigType: TypeAlias = DictConfig | ListConfig | Mapping | Sequence | str | int | float | bool | None
 
-
-def instantiate_recursively(cfg: DictConfig) -> dict:
+def instantiate_recursively(cfg: DictConfig | ListConfig) -> dict | list | object:
     """Recursively instantiate all objects in the config that have a `_target_` key.
 
     Args:
-        cfg (DictConfig): A Hydra config dictionary.
+        cfg (DictConfig | ListConfig): A Hydra configuration node.
 
     Returns:
-        dict: A dictionary where all instantiable elements have been instantiated.
+        dict | list | object: The instantiated config structure with all `_target_` entries resolved.
     """
-
-    def helper(value: ConfigType) -> ConfigType:
-        if isinstance(value, DictConfig):
-            if "_target_" in value:
-                return instantiate(value)
-            return {key: helper(val) for key, val in value.items()}
-        if isinstance(value, ListConfig):
-            return [helper(item) for item in value]
-        return value
-
-    return {key: helper(value) for key, value in cfg.items()}
+    if isinstance(cfg, DictConfig):
+        if "_target_" in cfg:
+            return instantiate(cfg)
+        return {k: instantiate_recursively(v) for k, v in cfg.items()}
+    if isinstance(cfg, ListConfig):
+        return [instantiate_recursively(i) for i in cfg]
+    return cfg

@@ -21,8 +21,7 @@ def train(cfg: DictConfig) -> None:
         cfg (DictConfig): The Hydra configuration object.
     """
     logging.info("Using configuration:\n" + OmegaConf.to_yaml(cfg))
-
-    model = instantiate(cfg.model)
+    model = instantiate_recursively(cfg.model)
     datamodule = instantiate(cfg.data)
     trainer_params = instantiate_recursively(cfg.trainer)
 

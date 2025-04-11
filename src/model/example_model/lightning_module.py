@@ -3,6 +3,8 @@
 
 """Example of LightningModule implementation for training a classification model."""
 
+from collections.abc import Callable
+
 import torch
 from lightning import LightningModule
 from torch.nn import functional
@@ -13,16 +15,17 @@ from .torch_model import ExampleTorchModel
 class ExampleLightningModel(LightningModule):
     """LightningModule for training, validating, and testing a classification model."""
 
-    def __init__(self, num_classes: int = 10, lr: float = 0.001) -> None:
+    def __init__(self, num_classes: int, optimizer: Callable) -> None:
         """Initialize the model.
 
         Args:
             num_classes (int): Number of output classes.
             lr (float): Learning rate for the optimizer.
+            optimizer (Callable): A partial function that returns an optimizer when passed model parameters.
         """
         super().__init__()
         self.model = ExampleTorchModel(num_classes)
-        self.lr = lr
+        self.optimizer = optimizer
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Perform a forward pass.
@@ -111,4 +114,4 @@ class ExampleLightningModel(LightningModule):
         Returns:
             torch.optim.Optimizer: The optimizer instance.
         """
-        return torch.optim.Adam(self.model.parameters(), lr=self.lr)
+        return self.optimizer(self.model.parameters())
