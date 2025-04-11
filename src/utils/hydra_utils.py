@@ -3,11 +3,17 @@
 
 """Hydra utilities."""
 
+from typing import TypeAlias
+
 from hydra.utils import instantiate
 from omegaconf import DictConfig, ListConfig
 
+InstantiatedConfig: TypeAlias = (
+    dict[str, "InstantiatedConfig"] | list["InstantiatedConfig"] | str | int | float | bool | None
+)
 
-def instantiate_recursively(cfg: DictConfig | ListConfig) -> dict | list | object:
+
+def instantiate_recursively(cfg: DictConfig | ListConfig) -> InstantiatedConfig:
     """Recursively instantiate all objects in the config that have a `_target_` key.
 
     Args:
