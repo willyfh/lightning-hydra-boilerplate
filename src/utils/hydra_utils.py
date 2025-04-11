@@ -20,7 +20,7 @@ def instantiate_recursively(cfg: DictConfig | ListConfig) -> InstantiatedConfig:
         cfg (DictConfig | ListConfig): A Hydra configuration node.
 
     Returns:
-        dict | list | object: The instantiated config structure with all `_target_` entries resolved.
+        InstantiatedConfig: The instantiated config structure with all `_target_` entries resolved.
     """
     if isinstance(cfg, DictConfig):
         if "_target_" in cfg:
