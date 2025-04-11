@@ -133,6 +133,7 @@ Each run is timestamped for easy tracking and reproducibility.
 - [x] Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
 - [x] Evaluation script (`eval.py`)
 - [x] Inference script (`predict.py`)
+- [x] Make optimizer configurable
 
 ## 📝 TODO List
 
