@@ -1,3 +1,6 @@
 _target_: src.model.example_model.lightning_module.ExampleLightningModel
-lr: 0.001
 num_classes: 10
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 0.001
