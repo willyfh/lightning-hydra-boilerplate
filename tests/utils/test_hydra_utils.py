@@ -3,10 +3,12 @@
 
 """Test utils.hydra_utils module."""
 
+from typing import cast
+
 import pytest
 from omegaconf import OmegaConf
 
-from utils.hydra_utils import instantiate_recursively
+from utils.hydra_utils import InstantiatedConfig, instantiate_recursively
 
 
 class Dummy:
@@ -47,17 +49,22 @@ def nested_cfg() -> OmegaConf:
 
 def test_basic_instantiation(basic_cfg: OmegaConf) -> None:
     """Test with no nested structure."""
-    out = instantiate_recursively(basic_cfg)
-    assert isinstance(out["a"], Dummy)
-    assert out["a"].value == 42
+    out = cast(dict[str, InstantiatedConfig], instantiate_recursively(basic_cfg))
+    a = cast(Dummy, out["a"])
+
+    assert isinstance(a, Dummy)
+    assert a.value == 42
     assert out["b"] == "not_instantiable"
 
 
 def test_nested_instantiation(nested_cfg: OmegaConf) -> None:
     """Test nested structure."""
-    out = instantiate_recursively(nested_cfg)
-    assert isinstance(out["a"]["x"], Dummy)
-    assert out["a"]["x"].value == 7
-    assert isinstance(out["list"][0], Dummy)
-    assert out["list"][0].value == 3
-    assert out["list"][1] == "static"
+    out = cast(dict[str, InstantiatedConfig], instantiate_recursively(nested_cfg))
+    a_x = cast(Dummy, cast(dict[str, InstantiatedConfig], out["a"])["x"])
+    list0 = cast(Dummy, cast(list[InstantiatedConfig], out["list"])[0])
+
+    assert isinstance(a_x, Dummy)
+    assert a_x.value == 7
+    assert isinstance(list0, Dummy)
+    assert list0.value == 3
+    assert cast(list[InstantiatedConfig], out["list"])[1] == "static"
