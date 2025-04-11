@@ -118,35 +118,9 @@ outputs/
 
 Each run is timestamped for easy tracking and reproducibility.
 
-## ✅ Completed Tasks
+## Contributing & Feedback
 
-- [x] Initial project setup with PyTorch Lightning and Hydra
-- [x] Basic training workflow with example model and data
-- [x] TensorBoard logging support
-- [x] Poetry setup
-- [x] Configurable Callbacks (EarlyStopping, ModelCheckpoint, etc.)
-- [x] Run test after training
-- [x] Setup pre-commit setup
-- [x] Setup tests
-- [x] Setup dependabot
-- [x] Add logger
-- [x] Organize `logs/`, `checkpoints/` (Lightning), and `outputs/` (Hydra) properly
-- [x] Evaluation script (`eval.py`)
-- [x] Inference script (`predict.py`)
-- [x] Make optimizer configurable
-
-## 📝 TODO List
-
-⚠️ _Feel free to fork the repo, create a PR, or open an issue if you spot anything or have ideas. I’d love to hear your feedback and make this more useful for everyone!_
-
-- [ ] Hyperparameter tuning with Optuna
-- [ ] Check Multi-GPU
-- [ ] Add more Lightning Trainer features (resume, callbacks, etc.)
-- [ ] MLflow and/or Wandb
-- [ ] Docker support for easy deployment
-- [ ] Make metrics configurable
-- [ ] Add task-specific examples and configs (e.g., object detection, text classification, etc.)
-- [ ] Add experiment configs for reusable training/eval setups (e.g., `configs/experiments/exp1.yaml`)
+⚠️ I welcome contributions! If you spot any issues, have suggestions, or want to enhance the project, feel free to check the issue list, fork the repo, create a PR, or open a new issue. Your feedback is valuable in making this project more useful for everyone!
 
 ## 📜 License
 
