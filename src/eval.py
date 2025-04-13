@@ -10,7 +10,6 @@ import lightning.pytorch as pl
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
 
-from utils.hydra_utils import instantiate_recursively
 from utils.logger_utils import setup_logger
 
 
@@ -24,12 +23,8 @@ def evaluate(cfg: DictConfig) -> None:
 
     model = instantiate(cfg.model)
     datamodule = instantiate(cfg.data)
-    trainer_params = instantiate_recursively(cfg.trainer)
-
-    if isinstance(trainer_params, dict):
-        callbacks_cfg = trainer_params.get("callbacks")
-        if isinstance(callbacks_cfg, dict):
-            trainer_params["callbacks"] = list(callbacks_cfg.values())
+    trainer_params = instantiate(cfg.trainer)
+    trainer_params["callbacks"] = list(trainer_params["callbacks"].values())
 
     trainer = pl.Trainer(**trainer_params)
     datamodule.setup()
