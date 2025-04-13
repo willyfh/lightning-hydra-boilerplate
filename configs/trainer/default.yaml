@@ -17,3 +17,19 @@ callbacks:
     mode: "min"
     save_top_k: 1
     verbose: true
+  - _target_: src.callbacks.metric_evaluator.MetricEvaluator
+    metrics:
+      validation:
+        - _target_: torchmetrics.Accuracy
+          task: "multiclass"
+          num_classes: ${model.num_classes}
+        - _target_: torchmetrics.F1Score
+          task: "multiclass"
+          num_classes: ${model.num_classes}
+      test:
+        - _target_: torchmetrics.Accuracy
+          task: "multiclass"
+          num_classes: ${model.num_classes}
+        - _target_: torchmetrics.F1Score
+          task: "multiclass"
+          num_classes: ${model.num_classes}
