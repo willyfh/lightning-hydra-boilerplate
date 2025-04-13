@@ -3,25 +3,17 @@ logger:
   _target_: lightning.pytorch.loggers.TensorBoardLogger
   save_dir: "${hydra:run.dir}/logs/"
 callbacks:
-  - _target_: lightning.pytorch.callbacks.EarlyStopping
+  early_stopping:
+    _target_: lightning.pytorch.callbacks.EarlyStopping
     monitor: "val_loss"
     mode: "min"
     patience: 3
     verbose: true
-  - _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  model_checkpoint:
+    _target_: lightning.pytorch.callbacks.ModelCheckpoint
     dirpath: "${hydra:run.dir}/checkpoints"
     filename: "best-checkpoint"
     monitor: "val_loss"
     mode: "min"
     save_top_k: 1
     verbose: true
-  - _target_: src.callbacks.metric_evaluator.MetricEvaluator
-    metrics:
-      validation:
-        - _target_: torchmetrics.Accuracy
-          task: "multiclass"
-          num_classes: ${model.num_classes}
-      test:
-        - _target_: torchmetrics.Accuracy
-          task: "multiclass"
-          num_classes: ${model.num_classes}

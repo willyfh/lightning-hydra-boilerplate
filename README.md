@@ -21,7 +21,7 @@ lightning-hydra-boilerplate/
 │   ├── trainer/
 │   │   ├── default.yaml
 │   ├── experiment/
-│   │   ├── exp1.yaml
+│   │   ├── example_experiment.yaml
 │   ├── train.yaml
 │   ├── eval.yaml
 │   ├── predict.yaml
@@ -66,7 +66,7 @@ poetry install
 Run the training script with the default configurations:
 
 ```bash
- poetry run python src/train.py
+ poetry run python src/train.py experiment=example_experiment
 ```
 
 This will:
@@ -80,7 +80,7 @@ This will:
 If you need to run evaluation independently on a specific checkpoint and dataset split (val or test), use the evaluation script:
 
 ```bash
-poetry run python src/eval.py data_split=test ckpt_path=/path/to/checkpoint.ckpt
+poetry run python src/eval.py experiment=example_experiment data_split=test ckpt_path=/path/to/checkpoint.ckpt
 ```
 
 ### **4️⃣ Predict Outputs**
@@ -88,7 +88,7 @@ poetry run python src/eval.py data_split=test ckpt_path=/path/to/checkpoint.ckpt
 To generate predictions from a trained model (e.g., for submission or analysis), run the predict.py script with the path to your checkpoint:
 
 ```bash
-poetry run python src/predict.py ckpt_path=/path/to/checkpoint.ckpt
+poetry run python src/predict.py experiment=example_experiment ckpt_path=/path/to/checkpoint.ckpt
 ```
 
 This will:
@@ -103,7 +103,7 @@ All experiment settings are managed with Hydra.
 You can modify the configs under configs/ or override them via CLI. For example:
 
 ```bash
- poetry run python src/train.py trainer.max_epochs=10
+ poetry run python src/train.py experiment=example_experiment trainer.max_epochs=10
 ```
 
 More info: https://hydra.cc/docs/intro/

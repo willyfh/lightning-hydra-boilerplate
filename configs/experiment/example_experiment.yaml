@@ -21,4 +21,16 @@ data:
 
 # Lightning Trainer parameters
 trainer:
-  max_epochs: 1
+  max_epochs: 2
+  callbacks:
+    metric_evaluator:
+      _target_: src.callbacks.metric_evaluator.MetricEvaluator
+      metrics:
+        validation:
+          - _target_: torchmetrics.Accuracy
+            task: "multiclass"
+            num_classes: ${model.num_classes}
+        test:
+          - _target_: torchmetrics.Accuracy
+            task: "multiclass"
+            num_classes: ${model.num_classes}

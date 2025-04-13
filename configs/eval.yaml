@@ -1,10 +1,9 @@
 defaults:
-  - model: example_model
-  - data: example_data
+  - model: ???
+  - data: ???
   - trainer: default
-  - experiment: null
+  - experiment: ???
 
-experiment_name: "eval"
 ckpt_path: ??? # User must override this
 data_split: "test" # one of: test or val
 
