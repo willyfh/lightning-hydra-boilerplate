@@ -33,6 +33,7 @@ lightning-hydra-boilerplate/
 │   │   ├── example_model/
 │   │   │   ├── lightning_module.py
 │   │   │   ├── torch_model.py
+│   ├── callbacks/
 │   ├── utils/
 │   ├── train.py               # Training entrypoint
 │   ├── eval.py                # Evaluation entrypoint

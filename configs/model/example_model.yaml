@@ -4,3 +4,6 @@ optimizer:
   _target_: torch.optim.Adam
   _partial_: true
   lr: 0.001
+loss_fn:
+  _target_: torch.nn.functional.cross_entropy
+  _partial_: true

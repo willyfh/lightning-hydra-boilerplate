@@ -7,7 +7,6 @@ from collections.abc import Callable
 
 import torch
 from lightning import LightningModule
-from torch.nn import functional
 
 from .torch_model import ExampleTorchModel
 
@@ -15,17 +14,18 @@ from .torch_model import ExampleTorchModel
 class ExampleLightningModel(LightningModule):
     """LightningModule for training, validating, and testing a classification model."""
 
-    def __init__(self, num_classes: int, optimizer: Callable) -> None:
+    def __init__(self, num_classes: int, optimizer: Callable, loss_fn: Callable) -> None:
         """Initialize the model.
 
         Args:
-            num_classes (int): Number of output classes.
-            lr (float): Learning rate for the optimizer.
+            num_classes (int): Number of output classes for the classification task.
             optimizer (Callable): A partial function that returns an optimizer when passed model parameters.
+            loss_fn (Callable): Loss function used for training, validation, and testing.
         """
         super().__init__()
         self.model = ExampleTorchModel(num_classes)
         self.optimizer = optimizer
+        self.loss_fn = loss_fn
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Perform a forward pass.
@@ -50,7 +50,7 @@ class ExampleLightningModel(LightningModule):
         """
         x, y = batch["image"], batch["label"]
         logits = self.forward(x)
-        loss = functional.cross_entropy(logits, y)
+        loss = self.loss_fn(logits, y)
         self.log("train_loss", loss)
         return loss
 
@@ -66,7 +66,7 @@ class ExampleLightningModel(LightningModule):
         """
         x, y = batch["image"], batch["label"]
         logits = self.forward(x)
-        loss = functional.cross_entropy(logits, y)
+        loss = self.loss_fn(logits, y)
         self.log("val_loss", loss, prog_bar=True)
         return loss
 
@@ -82,7 +82,7 @@ class ExampleLightningModel(LightningModule):
         """
         x, y = batch["image"], batch["label"]
         logits = self.forward(x)
-        loss = functional.cross_entropy(logits, y)
+        loss = self.loss_fn(logits, y)
         self.log("test_loss", loss, prog_bar=True)
         return loss
 
