@@ -8,7 +8,8 @@ import json
 from pathlib import Path
 
 import pytest
-from src.utils.pred_utils import save_predictions
+
+from utils.pred_utils import save_predictions
 
 
 @pytest.fixture
