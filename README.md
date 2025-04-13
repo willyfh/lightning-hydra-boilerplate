@@ -20,6 +20,8 @@ lightning-hydra-boilerplate/
 │   │   ├── example_model.yaml
 │   ├── trainer/
 │   │   ├── default.yaml
+│   ├── experiment/
+│   │   ├── exp1.yaml
 │   ├── train.yaml
 │   ├── eval.yaml
 │   ├── predict.yaml

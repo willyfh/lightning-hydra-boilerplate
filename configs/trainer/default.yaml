@@ -1,5 +1,3 @@
-max_epochs: 10
-devices: 1
 default_root_dir: ${hydra:run.dir}
 logger:
   _target_: lightning.pytorch.loggers.TensorBoardLogger
@@ -23,13 +21,7 @@ callbacks:
         - _target_: torchmetrics.Accuracy
           task: "multiclass"
           num_classes: ${model.num_classes}
-        - _target_: torchmetrics.F1Score
-          task: "multiclass"
-          num_classes: ${model.num_classes}
       test:
         - _target_: torchmetrics.Accuracy
-          task: "multiclass"
-          num_classes: ${model.num_classes}
-        - _target_: torchmetrics.F1Score
           task: "multiclass"
           num_classes: ${model.num_classes}

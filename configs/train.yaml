@@ -3,10 +3,7 @@ defaults:
   - model: example_model
   - data: example_data
   - trainer: default
-
-seed: 42
-skip_test: False
-experiment_name: "exp"
+  - experiment: null # Optional, can override experiment
 
 hydra:
   run:
