@@ -2,6 +2,7 @@ defaults:
   - model: example_model
   - data: example_data
   - trainer: default
+  - experiment: null
 
 experiment_name: "eval"
 ckpt_path: ??? # User must override this

@@ -1,0 +1,24 @@
+# @package _global_
+
+defaults:
+  - override /model: example_model # Override the model to use
+  - override /data: example_data # Override the data module to use
+  - override /trainer: default # Override or define trainer settings
+
+# Base configuration
+seed: 42
+skip_test: False
+experiment_name: "exp"
+
+# Model parameters
+model:
+  optimizer:
+    lr: 0.001
+
+# Data parameters
+data:
+  batch_size: 64
+
+# Lightning Trainer parameters
+trainer:
+  max_epochs: 1
