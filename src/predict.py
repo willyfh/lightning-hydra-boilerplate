@@ -12,7 +12,6 @@ from hydra.core.hydra_config import HydraConfig
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
 
-from utils.hydra_utils import instantiate_recursively
 from utils.logger_utils import setup_logger
 from utils.pred_utils import save_predictions
 
@@ -27,13 +26,10 @@ def predict(cfg: DictConfig) -> None:
 
     model = instantiate(cfg.model)
     datamodule = instantiate(cfg.data)
-    trainer_params = instantiate_recursively(cfg.trainer)
-    trainer = pl.Trainer(**trainer_params)
+    trainer_params = instantiate(cfg.trainer)
+    trainer_params["callbacks"] = list(trainer_params["callbacks"].values())
 
-    if isinstance(trainer_params, dict):
-        callbacks_cfg = trainer_params.get("callbacks")
-        if isinstance(callbacks_cfg, dict):
-            trainer_params["callbacks"] = list(callbacks_cfg.values())
+    trainer = pl.Trainer(**trainer_params)
 
     datamodule.setup()
 
