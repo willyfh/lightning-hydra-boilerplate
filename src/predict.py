@@ -30,10 +30,10 @@ def predict(cfg: DictConfig) -> None:
     trainer_params = instantiate_recursively(cfg.trainer)
     trainer = pl.Trainer(**trainer_params)
 
-    if isinstance(trainer_params, DictConfig):
+    if isinstance(trainer_params, dict):
         callbacks_cfg = trainer_params.get("callbacks")
-        if isinstance(callbacks_cfg, DictConfig):
-            trainer_params.callbacks = list(callbacks_cfg.values())
+        if isinstance(callbacks_cfg, dict):
+            trainer_params["callbacks"] = list(callbacks_cfg.values())
 
     datamodule.setup()
 

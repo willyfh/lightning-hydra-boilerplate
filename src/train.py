@@ -25,10 +25,10 @@ def train(cfg: DictConfig) -> None:
     datamodule = instantiate(cfg.data)
     trainer_params = instantiate_recursively(cfg.trainer)
 
-    if isinstance(trainer_params, DictConfig):
+    if isinstance(trainer_params, dict):
         callbacks_cfg = trainer_params.get("callbacks")
-        if isinstance(callbacks_cfg, DictConfig):
-            trainer_params.callbacks = list(callbacks_cfg.values())
+        if isinstance(callbacks_cfg, dict):
+            trainer_params["callbacks"] = list(callbacks_cfg.values())
 
     # Setup the datasets
     datamodule.setup()
