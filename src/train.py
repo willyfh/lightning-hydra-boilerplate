@@ -25,6 +25,11 @@ def train(cfg: DictConfig) -> None:
     datamodule = instantiate(cfg.data)
     trainer_params = instantiate_recursively(cfg.trainer)
 
+    if isinstance(trainer_params, DictConfig):
+        callbacks_cfg = trainer_params.get("callbacks")
+        if isinstance(callbacks_cfg, DictConfig):
+            trainer_params.callbacks = list(callbacks_cfg.values())
+
     # Setup the datasets
     datamodule.setup()
     train_size = len(datamodule.train_dataloader().dataset)

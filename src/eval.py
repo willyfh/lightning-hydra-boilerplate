@@ -26,6 +26,11 @@ def evaluate(cfg: DictConfig) -> None:
     datamodule = instantiate(cfg.data)
     trainer_params = instantiate_recursively(cfg.trainer)
 
+    if isinstance(trainer_params, DictConfig):
+        callbacks_cfg = trainer_params.get("callbacks")
+        if isinstance(callbacks_cfg, DictConfig):
+            trainer_params.callbacks = list(callbacks_cfg.values())
+
     trainer = pl.Trainer(**trainer_params)
     datamodule.setup()
 
