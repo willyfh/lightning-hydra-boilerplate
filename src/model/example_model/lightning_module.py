@@ -67,9 +67,7 @@ class ExampleLightningModel(LightningModule):
         x, y, _ = batch
         logits = self.forward(x)
         loss = functional.cross_entropy(logits, y)
-        acc = (logits.argmax(dim=1) == y).float().mean()
         self.log("val_loss", loss, prog_bar=True)
-        self.log("val_acc", acc, prog_bar=True)
         return loss
 
     def test_step(self, batch: tuple[torch.Tensor, torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
@@ -85,9 +83,7 @@ class ExampleLightningModel(LightningModule):
         x, y, _ = batch
         logits = self.forward(x)
         loss = functional.cross_entropy(logits, y)
-        acc = (logits.argmax(dim=1) == y).float().mean()
         self.log("test_loss", loss, prog_bar=True)
-        self.log("test_acc", acc, prog_bar=True)
         return loss
 
     def predict_step(self, batch: tuple[torch.Tensor, torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
