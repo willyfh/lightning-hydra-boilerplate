@@ -53,12 +53,12 @@ class MetricEvaluator(Callback):
         _trainer: Trainer,
         pl_module: LightningModule,
         _outputs: STEP_OUTPUT,
-        batch: tuple,
+        batch: dict,
         _batch_idx: int,
         _dataloader_idx: int = 0,
     ) -> None:
         """Update validation metrics with each batch."""
-        x, y, _ = batch
+        x, y = batch["image"], batch["label"]
         preds = pl_module(x).argmax(dim=1)
         self._update("validation", preds, y)
 
@@ -75,12 +75,12 @@ class MetricEvaluator(Callback):
         _trainer: Trainer,
         pl_module: LightningModule,
         _outputs: STEP_OUTPUT,
-        batch: tuple,
+        batch: dict,
         _batch_idx: int,
         _dataloader_idx: int = 0,
     ) -> None:
         """Update test metrics with each batch."""
-        x, y, _ = batch
+        x, y = batch["image"], batch["label"]
         preds = pl_module(x).argmax(dim=1)
         self._update("test", preds, y)
 

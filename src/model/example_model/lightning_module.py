@@ -38,7 +38,7 @@ class ExampleLightningModel(LightningModule):
         """
         return self.model(x)
 
-    def training_step(self, batch: tuple[torch.Tensor, torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
+    def training_step(self, batch: dict, _: int) -> torch.Tensor:
         """Run one training step.
 
         Args:
@@ -48,13 +48,13 @@ class ExampleLightningModel(LightningModule):
         Returns:
             torch.Tensor: Training loss.
         """
-        x, y, _ = batch
+        x, y = batch["image"], batch["label"]
         logits = self.forward(x)
         loss = functional.cross_entropy(logits, y)
         self.log("train_loss", loss)
         return loss
 
-    def validation_step(self, batch: tuple[torch.Tensor, torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
+    def validation_step(self, batch: dict, _: int) -> torch.Tensor:
         """Run one validation step.
 
         Args:
@@ -64,13 +64,13 @@ class ExampleLightningModel(LightningModule):
         Returns:
             torch.Tensor: Validation loss.
         """
-        x, y, _ = batch
+        x, y = batch["image"], batch["label"]
         logits = self.forward(x)
         loss = functional.cross_entropy(logits, y)
         self.log("val_loss", loss, prog_bar=True)
         return loss
 
-    def test_step(self, batch: tuple[torch.Tensor, torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
+    def test_step(self, batch: dict, _: int) -> torch.Tensor:
         """Evaluate the model on the test set.
 
         Args:
@@ -80,13 +80,13 @@ class ExampleLightningModel(LightningModule):
         Returns:
             torch.Tensor: Test loss.
         """
-        x, y, _ = batch
+        x, y = batch["image"], batch["label"]
         logits = self.forward(x)
         loss = functional.cross_entropy(logits, y)
         self.log("test_loss", loss, prog_bar=True)
         return loss
 
-    def predict_step(self, batch: tuple[torch.Tensor, torch.Tensor, torch.Tensor], _: int) -> torch.Tensor:
+    def predict_step(self, batch: dict, _: int) -> torch.Tensor:
         """Generate predictions for a given batch during inference.
 
         This method is used during `Trainer.predict()` to produce model outputs,
@@ -99,7 +99,7 @@ class ExampleLightningModel(LightningModule):
         Returns:
             torch.Tensor: Model predictions (e.g., predicted class indices).
         """
-        x, _, idx = batch
+        x, idx = batch["image"], batch["index"]
         logits = self.forward(x)
         preds = torch.argmax(logits, dim=1)
         return {"idx": idx, "pred": preds}
