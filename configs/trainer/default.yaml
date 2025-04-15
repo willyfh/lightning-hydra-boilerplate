@@ -1,7 +1,7 @@
-default_root_dir: ${hydra:run.dir}
+default_root_dir: ${hydra:runtime.output_dir}
 logger:
   _target_: lightning.pytorch.loggers.TensorBoardLogger
-  save_dir: "${hydra:run.dir}/logs/"
+  save_dir: "${hydra:runtime.output_dir}/logs/"
 callbacks:
   early_stopping:
     _target_: lightning.pytorch.callbacks.EarlyStopping
@@ -11,7 +11,7 @@ callbacks:
     verbose: true
   model_checkpoint:
     _target_: lightning.pytorch.callbacks.ModelCheckpoint
-    dirpath: "${hydra:run.dir}/checkpoints"
+    dirpath: "${hydra:runtime.output_dir}/checkpoints"
     filename: "best-checkpoint"
     monitor: "val_loss"
     mode: "min"

@@ -108,7 +108,21 @@ You can modify the configs under configs/ or override them via CLI. For example:
 
 More info: https://hydra.cc/docs/intro/
 
-### **6️⃣ Outputs**
+6️⃣ Hyperparameter Optimization with Optuna
+
+To perform hyperparameter optimization using Optuna, you can run the training with the sweep feature, which allows you to search for the best hyperparameters for your model automatically. The results will be stored in a designated sweeps/ directory.
+
+```bash
+poetry run python src/train.py experiment=example_experiment params_search=example_optuna
+```
+
+This will:
+
+- Perform hyperparameter optimization using Optuna
+
+- Log the best trial configuration and metrics to `outputs/sweeps/`
+
+### **7️⃣ Outputs**
 
 All run outputs are saved under the `outputs/` directory:
 
@@ -117,9 +131,10 @@ outputs/
 ├── train/    ← training logs, checkpoints, config snapshots
 ├── eval/     ← evaluation logs and results
 ├── predict/  ← prediction files (e.g. .csv, .json)
+├── sweeps/   ← results from Optuna hyperparameter sweeps
 ```
 
-Each run is timestamped for easy tracking and reproducibility.
+Each run is timestamped for easy tracking and reproducibility. The `sweeps/` directory will contain subdirectories for each trial and the results of the hyperparameter search.
 
 ## Contributing & Feedback
 
