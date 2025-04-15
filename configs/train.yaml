@@ -4,7 +4,10 @@ defaults:
   - data: ???
   - trainer: default
   - experiment: ???
+  - params_search: null
 
 hydra:
   run:
     dir: "outputs/train/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"
+  sweep:
+    dir: outputs/sweeps/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}
