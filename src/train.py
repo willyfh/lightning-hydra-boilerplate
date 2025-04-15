@@ -52,7 +52,7 @@ def train(cfg: DictConfig) -> dict:
 
     # Optionally run test
     if not cfg.skip_test:
-        trainer.test(model, datamodule=datamodule)
+        trainer.test(datamodule=datamodule, ckpt_path="best")
         # Metrics after testing
         test_metrics = trainer.callback_metrics
         logging.info(f"Test results:\n{test_metrics}")
