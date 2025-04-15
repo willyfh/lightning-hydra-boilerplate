@@ -10,4 +10,4 @@ hydra:
   run:
     dir: "outputs/train/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"
   sweep:
-    dir: outputs/sweeps/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}
+    dir: "outputs/sweeps/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"
