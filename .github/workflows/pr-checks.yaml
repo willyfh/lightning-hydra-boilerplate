@@ -1,18 +1,18 @@
-name: Run Tests
+name: Run Tests and Pre-commit
 
 on:
-  push:
-    branches: [main]
   pull_request:
+    branches:
+      - main
 
 jobs:
-  test:
+  ci_checks:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 3
       fail-fast: false
       matrix:
-        python-version: ["3.12"]
+        python-version: ["3.12", "3.11", "3.10"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,6 +29,12 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install
+
+      - name: Run Pre-commit
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install pre-commit
+          pre-commit run --all-files
 
       - name: Run tests
         run: |
