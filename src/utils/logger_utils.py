@@ -5,7 +5,29 @@
 
 import logging
 from pathlib import Path
+from lightning.pytorch.utilities import rank_zero_only
 
+
+# Dictionary to map log levels to the corresponding logger method
+LOG_LEVELS = {
+    'debug': logging.debug,
+    'info': logging.info,
+    'warning': logging.warning,
+    'error': logging.error,
+    'critical': logging.critical
+}
+
+@rank_zero_only
+def log_message(level: str, message: str):
+    """Logging function to handle different log levels, ensuring only main process logs.
+    
+    Args:
+        level (str): Log level (e.g., 'debug', 'info', 'warning', 'error', 'critical').
+        message (str): Message to log.
+    """
+    # Get the appropriate logging function from the dictionary, default to 'info'
+    log_func = LOG_LEVELS.get(level, logging.info)
+    log_func(message)
 
 def setup_logger(log_file: str | None = None, log_level: int = logging.INFO) -> None:
     """Set up basic logging configuration. Logs will be printed to both console and optionally to a file.
