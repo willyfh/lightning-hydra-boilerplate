@@ -1,12 +1,12 @@
-name: Run Tests
+name: Run Tests and Pre-commit
 
 on:
-  push:
-    branches: [main]
   pull_request:
+    branches:
+      - main
 
 jobs:
-  test:
+  test_and_pre_commit:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 3
@@ -29,6 +29,12 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install
+
+      - name: Run Pre-commit
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install pre-commit
+          pre-commit run --all-files
 
       - name: Run tests
         run: |
