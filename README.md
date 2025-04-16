@@ -1,7 +1,7 @@
 <div align="center">
 <h1> ⚡ Lightning-Hydra-Boilerplate </h1>
 
-[![python](https://img.shields.io/badge/python-3.10-blue)]() [![python](https://img.shields.io/badge/python-3.11-blue)]() [![python](https://img.shields.io/badge/python-3.12-blue)]() [![Run Tests](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/pytest.yaml/badge.svg)](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/pytest.yaml)
+[![python](https://img.shields.io/badge/python-3.10-blue)]() [![python](https://img.shields.io/badge/python-3.11-blue)]() [![python](https://img.shields.io/badge/python-3.12-blue)]() [![Run Tests](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/ci-checks.yaml/badge.svg)](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/ci-checks.yaml)
 
 </div>
 
