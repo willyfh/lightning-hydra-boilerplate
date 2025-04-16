@@ -11,7 +11,7 @@ A project boilerplate for deep learning experiments using PyTorch Lightning and 
 
 🚀 **Feel free to click "Use this template"** to start your own project based on this boilerplate!
 
-## Key Features:
+## Key Features
 
 📝 **Model, Data, and Training Configurations**: Configurable setup for models, datasets, and training parameters via `Hydra`.
 
@@ -28,7 +28,6 @@ A project boilerplate for deep learning experiments using PyTorch Lightning and 
 🔧 **Dependency Management**: Integrated `Poetry` for dependency management and environment setup.
 
 ⚙️ **Continuous Integration (CI)**: Configured continuous integration with pre-commit hooks and test automation.
-
 
 ## 📁 Project Structure
 
