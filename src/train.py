@@ -3,14 +3,12 @@
 
 """Training entry point using Hydra and PyTorch Lightning."""
 
-import logging
-
 import hydra
 import lightning.pytorch as pl
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
 
-from utils.logger_utils import setup_logger
+from utils.logger_utils import log_message, setup_logger
 
 
 def train(cfg: DictConfig) -> dict:
@@ -24,7 +22,7 @@ def train(cfg: DictConfig) -> dict:
     Returns:
         dict: A dictionary containing training and test metrics.
     """
-    logging.info("Using configuration:\n" + OmegaConf.to_yaml(cfg))
+    log_message("info", "Using configuration:\n" + OmegaConf.to_yaml(cfg))
     model = instantiate(cfg.model)
     datamodule = instantiate(cfg.data)
     trainer_params = instantiate(cfg.trainer)
@@ -37,9 +35,9 @@ def train(cfg: DictConfig) -> dict:
     test_size = len(datamodule.test_dataloader().dataset)
 
     # Log dataset sizes
-    logging.info(f"Training dataset size: {train_size}")
-    logging.info(f"Validation dataset size: {val_size}")
-    logging.info(f"Test dataset size: {test_size}")
+    log_message("info", f"Training dataset size: {train_size}")
+    log_message("info", f"Validation dataset size: {val_size}")
+    log_message("info", f"Test dataset size: {test_size}")
 
     trainer = pl.Trainer(**trainer_params)
 
@@ -48,17 +46,17 @@ def train(cfg: DictConfig) -> dict:
 
     # Gather metrics after training
     train_metrics = trainer.callback_metrics
-    logging.info(f"Metrics after training:\n{train_metrics}")
+    log_message("info", f"Metrics after training:\n{train_metrics}")
 
     # Optionally run test
     if not cfg.skip_test:
         trainer.test(datamodule=datamodule, ckpt_path="best")
         # Metrics after testing
         test_metrics = trainer.callback_metrics
-        logging.info(f"Test results:\n{test_metrics}")
+        log_message("info", f"Test results:\n{test_metrics}")
     else:
         test_metrics = {}
-        logging.info("Test stage skipped.")
+        log_message("info", "Test stage skipped.")
 
     return {**train_metrics, **test_metrics}
 
@@ -81,7 +79,7 @@ def main(cfg: DictConfig) -> float | None:
     results = train(cfg)
 
     optimized_value = results.get(cfg.get("optimized_metric"))
-    logging.info(f"Returning optimized metric ({cfg.get('optimized_metric')}): {optimized_value}")
+    log_message("info", f"Returning optimized metric ({cfg.get('optimized_metric')}): {optimized_value}")
     return optimized_value
 
 

@@ -3,14 +3,12 @@
 
 """Evaluation entry point using Hydra and PyTorch Lightning."""
 
-import logging
-
 import hydra
 import lightning.pytorch as pl
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
 
-from utils.logger_utils import setup_logger
+from utils.logger_utils import log_message, setup_logger
 
 
 def evaluate(cfg: DictConfig) -> None:
@@ -19,7 +17,7 @@ def evaluate(cfg: DictConfig) -> None:
     Args:
         cfg (DictConfig): Hydra configuration object.
     """
-    logging.info("Running evaluation with configuration:\n%s", OmegaConf.to_yaml(cfg))
+    log_message("info", "Running evaluation with configuration:\n%s", OmegaConf.to_yaml(cfg))
 
     model = instantiate(cfg.model)
     datamodule = instantiate(cfg.data)
@@ -44,8 +42,8 @@ def evaluate(cfg: DictConfig) -> None:
         error_msg = f"Unknown data_split: {data_split}"
         raise ValueError(error_msg)
 
-    logging.info(f"{split_name} dataset size: {len(dataset)}")
-    logging.info(f"Evaluation results on {split_name} set:\n{results}")
+    log_message("info", f"{split_name} dataset size: {len(dataset)}")
+    log_message("info", f"Evaluation results on {split_name} set:\n{results}")
 
 
 @hydra.main(version_base=None, config_path="../configs", config_name="eval")

@@ -3,7 +3,6 @@
 
 """Inference script to generate and save model predictions."""
 
-import logging
 from pathlib import Path
 
 import hydra
@@ -12,7 +11,7 @@ from hydra.core.hydra_config import HydraConfig
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
 
-from utils.logger_utils import setup_logger
+from utils.logger_utils import log_message, setup_logger
 from utils.pred_utils import save_predictions
 
 
@@ -22,7 +21,7 @@ def predict(cfg: DictConfig) -> None:
     Args:
         cfg (DictConfig): Hydra configuration object containing model, data, and trainer settings.
     """
-    logging.info("Running prediction with configuration:\n%s", OmegaConf.to_yaml(cfg))
+    log_message("info", "Running prediction with configuration:\n%s", OmegaConf.to_yaml(cfg))
 
     model = instantiate(cfg.model)
     datamodule = instantiate(cfg.data)
@@ -64,7 +63,7 @@ def predict(cfg: DictConfig) -> None:
     run_dir = HydraConfig.get().run.dir
     output_path = Path(run_dir) / f"predictions.{cfg.save_format}"
     save_predictions(flat_preds, output_path, cfg.save_format)
-    logging.info(f"Predictions of {cfg.data_split} split are saved to {output_path}")
+    log_message("info", f"Predictions of {cfg.data_split} split are saved to {output_path}")
 
 
 @hydra.main(version_base=None, config_path="../configs", config_name="predict")

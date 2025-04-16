@@ -1,3 +1,4 @@
+accelerator: auto
 default_root_dir: ${hydra:runtime.output_dir}
 logger:
   _target_: lightning.pytorch.loggers.TensorBoardLogger
@@ -7,7 +8,7 @@ callbacks:
     _target_: lightning.pytorch.callbacks.EarlyStopping
     monitor: "val_loss"
     mode: "min"
-    patience: 3
+    patience: 10
     verbose: true
   model_checkpoint:
     _target_: lightning.pytorch.callbacks.ModelCheckpoint

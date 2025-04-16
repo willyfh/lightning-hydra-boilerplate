@@ -1,0 +1,6 @@
+defaults:
+  - base
+
+accelerator: gpu
+devices: auto
+strategy: deepspeed_stage_2 # Or stage_3 depending on your needs

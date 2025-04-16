@@ -3,7 +3,7 @@
 defaults:
   - override /model: example_model # Override the model to use
   - override /data: example_data # Override the data module to use
-  - override /trainer: default # Override or define trainer settings
+  - override /trainer: base # Override or define trainer settings
 
 # Base configuration
 seed: 42

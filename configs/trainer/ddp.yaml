@@ -1,0 +1,6 @@
+defaults:
+  - base
+
+accelerator: gpu
+devices: auto
+strategy: ddp
