@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  test_and_pre_commit:
+  ci_checks:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 3
@@ -29,6 +29,10 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install
+
+      - name: Install toml
+        run: |
+          python3 -m pip install toml
 
       - name: Run Pre-commit
         run: |
