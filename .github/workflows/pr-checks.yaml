@@ -30,10 +30,6 @@ jobs:
         run: |
           poetry install
 
-      - name: Install toml
-        run: |
-          python3 -m pip install toml
-
       - name: Run Pre-commit
         run: |
           python3 -m pip install --upgrade pip
