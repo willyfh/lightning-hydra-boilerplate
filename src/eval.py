@@ -3,14 +3,12 @@
 
 """Evaluation entry point using Hydra and PyTorch Lightning."""
 
-import logging
-
 import hydra
 import lightning.pytorch as pl
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
 
-from utils.logger_utils import setup_logger, log_message
+from utils.logger_utils import log_message, setup_logger
 
 
 def evaluate(cfg: DictConfig) -> None:

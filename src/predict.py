@@ -3,7 +3,6 @@
 
 """Inference script to generate and save model predictions."""
 
-import logging
 from pathlib import Path
 
 import hydra
@@ -12,7 +11,7 @@ from hydra.core.hydra_config import HydraConfig
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
 
-from utils.logger_utils import setup_logger, log_message
+from utils.logger_utils import log_message, setup_logger
 from utils.pred_utils import save_predictions
 
 
