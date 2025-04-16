@@ -1,13 +1,34 @@
 <div align="center">
 <h1> ⚡ Lightning-Hydra-Boilerplate </h1>
 
-[![python](https://img.shields.io/badge/python-3.10-blue)]() [![python](https://img.shields.io/badge/python-3.11-blue)]() [![python](https://img.shields.io/badge/python-3.12-blue)]() [![Run Tests](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/ci-checks.yaml/badge.svg)](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/ci-checks.yaml)
+[![python](https://img.shields.io/badge/python-3.10-blue)]() [![python](https://img.shields.io/badge/python-3.11-blue)]() [![python](https://img.shields.io/badge/python-3.12-blue)]() [![Run Tests](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/ci-checks.yaml/badge.svg)](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/ci-checks.yaml) [![MIT License](https://img.shields.io/badge/License-MIT-yellow)](https://opensource.org/licenses/MIT)
 
 </div>
 
 A project boilerplate for deep learning experiments using PyTorch Lightning and Hydra, designed for rapid prototyping, clean configuration management, and scalable research workflows.
 
-⚠️ _This project is in its early stages and still under active development. Expect breaking changes and incomplete features._
+🔬 This project will continue to be validated through research workflows. While the current functionality is ready for use, ongoing improvements are expected as it evolves through practical use and feedback 🌱.
+
+🚀 **Feel free to click "Use this template"** to start your own project based on this boilerplate!
+
+## Key Features:
+
+📝 **Model, Data, and Training Configurations**: Configurable setup for models, datasets, and training parameters via `Hydra`.
+
+📊 **Logging**: Default logging with `TensorBoard`, but easily configurable to support other logging tools (via `PyTorch Lightning`).
+
+🧑‍💻 **Callbacks Support**: Built-in support for early stopping, model checkpointing (best and last), and more (via `PyTorch Lightning`).
+
+🎯 **Evaluation and Prediction Scripts**: Pre-configured scripts for training, evaluation, and prediction workflows.
+
+💡 **Multi-Accelerator Support**: Example configurations for various accelerators like `CPU`, `DDP`, `DeepSpeed`, and more (via `PyTorch Lightning`).
+
+🔍 **Metrics Logging**: Clear separation of metrics, ensuring extendability and seamless integration with `TorchMetrics` or custom metrics.
+
+🔧 **Dependency Management**: Integrated `Poetry` for dependency management and environment setup.
+
+⚙️ **Continuous Integration (CI)**: Configured continuous integration with pre-commit hooks and test automation.
+
 
 ## 📁 Project Structure
 
@@ -19,9 +40,15 @@ lightning-hydra-boilerplate/
 │   ├── model/
 │   │   ├── example_model.yaml
 │   ├── trainer/
-│   │   ├── default.yaml
+│   │   ├── base.yaml
+│   │   ├── cpu.yaml
+│   │   ├── ddp.yaml
+│   │   ├── deepspeed.yaml
+│   │   ├── ...
 │   ├── experiment/
 │   │   ├── example_experiment.yaml
+│   ├── params_search/
+│   │   ├── example_optuna.yaml
 │   ├── train.yaml
 │   ├── eval.yaml
 │   ├── predict.yaml
@@ -108,7 +135,7 @@ You can modify the configs under configs/ or override them via CLI. For example:
 
 More info: https://hydra.cc/docs/intro/
 
-6️⃣ Hyperparameter Optimization with Optuna
+### 6️⃣ **Hyperparameter Optimization with Optuna**
 
 To perform hyperparameter optimization using Optuna, you can run the training with the sweep feature, which allows you to search for the best hyperparameters for your model automatically. The results will be stored in a designated sweeps/ directory.
 
