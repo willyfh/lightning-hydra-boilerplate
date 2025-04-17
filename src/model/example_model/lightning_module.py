@@ -14,18 +14,27 @@ from .torch_model import ExampleTorchModel
 class ExampleLightningModel(LightningModule):
     """LightningModule for training, validating, and testing a classification model."""
 
-    def __init__(self, num_classes: int, optimizer: Callable, loss_fn: Callable) -> None:
+    def __init__(
+        self,
+        num_classes: int,
+        optimizer: Callable,
+        loss_fn: Callable,
+        scheduler: Callable | None = None,
+    ) -> None:
         """Initialize the model.
 
         Args:
             num_classes (int): Number of output classes for the classification task.
             optimizer (Callable): A partial function that returns an optimizer when passed model parameters.
             loss_fn (Callable): Loss function used for training, validation, and testing.
+            scheduler (Callable, optional): A scheduler function to adjust the learning rate.
+
         """
         super().__init__()
         self.model = ExampleTorchModel(num_classes)
         self.optimizer = optimizer
         self.loss_fn = loss_fn
+        self.scheduler = scheduler
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Perform a forward pass.
@@ -104,10 +113,25 @@ class ExampleLightningModel(LightningModule):
         preds = torch.argmax(logits, dim=1)
         return {"idx": idx, "pred": preds}
 
-    def configure_optimizers(self) -> torch.optim.Optimizer:
-        """Set up the optimizer.
+    def configure_optimizers(self) -> torch.optim.Optimizer | dict:
+        """Set up the optimizer and scheduler.
 
         Returns:
-            torch.optim.Optimizer: The optimizer instance.
+            torch.optim.Optimizer | dict: The optimizer instance if no scheduler is used,
+            or a dictionary containing the optimizer and scheduler if a scheduler is provided.
         """
-        return self.optimizer(self.model.parameters())
+        optimizer = self.optimizer(self.model.parameters())
+
+        # If scheduler is provided, return the optimizer and scheduler
+        if self.scheduler:
+            scheduler = self.scheduler(optimizer)
+            return {
+                "optimizer": optimizer,
+                "lr_scheduler": {
+                    "scheduler": scheduler,
+                    "interval": "epoch",  # You can also use "step" if you want the scheduler to step per batch
+                    "frequency": 1,
+                },
+            }
+
+        return optimizer
