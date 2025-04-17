@@ -11,23 +11,20 @@ A project boilerplate for deep learning experiments using PyTorch Lightning and 
 
 🚀 **Feel free to click "Use this template"** to start your own project based on this boilerplate!
 
-## Key Features
+## 🔑 Key Features
 
-📝 **Model, Data, and Training Configurations**: Configurable setup for models, datasets, and training parameters via `Hydra`.
-
-📊 **Logging**: Default logging with `TensorBoard`, but easily configurable to support other logging tools (via `PyTorch Lightning`).
-
-🧑‍💻 **Callbacks Support**: Built-in support for early stopping, model checkpointing (best and last), and more (via `PyTorch Lightning`).
-
-🎯 **Evaluation and Prediction Scripts**: Pre-configured scripts for training, evaluation, and prediction workflows.
-
-💡 **Multi-Accelerator Support**: Example configurations for various accelerators like `CPU`, `DDP`, `DeepSpeed`, and more (via `PyTorch Lightning`).
-
-🔍 **Metrics Logging**: Clear separation of metrics, ensuring extendability and seamless integration with `TorchMetrics` or custom metrics.
-
-🔧 **Dependency Management**: Integrated `Poetry` for dependency management and environment setup.
-
-⚙️ **Continuous Integration (CI)**: Configured continuous integration with pre-commit hooks and test automation.
+| Feature                      | Description                                                                            |
+| ---------------------------- | -------------------------------------------------------------------------------------- |
+| 📝 **Configurable Setup**    | Model, dataset, and training configuration using `Hydra`.                              |
+| 📊 **Logging**               | Default: `TensorBoard`. Easily switch to other tools via `PyTorch Lightning`.          |
+| ⚗️ **Hyperparameter Tuning** | Integration with `Optuna` for automated hyperparameter search.                         |
+| 🧑‍💻 **Callbacks**             | Includes early stopping, checkpointing (best & last), and more via `PyTorch Lightning` |
+| 💡 **Accelerator Support**   | Example configs for `CPU`, `DDP`, `DeepSpeed`, and more via `PyTorch Lightning`        |
+| 🎯 **Scripts**               | Pre-configured training, evaluation, and prediction workflows.                         |
+| 📂 **Organized Outputs**     | Logs, checkpoints, configs, and predictions saved in a structured folder.              |
+| 🔍 **Metrics Handling**      | Clean separation of metrics, works with `TorchMetrics` or custom.                      |
+| 🔧 **Dependency Management** | Uses `Poetry` for environment and package management.                                  |
+| ⚙️ **CI Integration**        | Comes with pre-commit hooks and automated testing setup.                               |
 
 ## 📁 Project Structure
 
@@ -162,7 +159,7 @@ outputs/
 
 Each run is timestamped for easy tracking and reproducibility. The `sweeps/` directory will contain subdirectories for each trial and the results of the hyperparameter search.
 
-## Contributing & Feedback
+## 🌱 Contributing & Feedback
 
 ⚠️ I welcome contributions! If you spot any issues, have suggestions, or want to enhance the project, feel free to check the issue list, fork the repo, create a PR, or open a new issue. Your feedback is valuable in making this project more useful for everyone!
 
