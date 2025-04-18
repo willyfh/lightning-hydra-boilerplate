@@ -5,6 +5,8 @@ defaults:
   - trainer: default
   - experiment: ???
   - params_search: null
+  - override hydra/job_logging: colorlog
+  - override hydra/hydra_logging: colorlog
 
 hydra:
   run:

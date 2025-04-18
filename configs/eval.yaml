@@ -1,8 +1,11 @@
 defaults:
+  - _self_
   - model: ???
   - data: ???
   - trainer: default
   - experiment: ???
+  - override hydra/job_logging: colorlog
+  - override hydra/hydra_logging: colorlog
 
 ckpt_path: ??? # User must override this
 data_split: "test" # one of: test or val
