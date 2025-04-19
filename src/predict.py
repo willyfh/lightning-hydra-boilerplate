@@ -21,7 +21,7 @@ def predict(cfg: DictConfig) -> None:
     Args:
         cfg (DictConfig): Hydra configuration object containing model, data, and trainer settings.
     """
-    log_message("info", "Running prediction with configuration:\n%s", OmegaConf.to_yaml(cfg))
+    log_message("info", f"Running prediction with configuration:\n{OmegaConf.to_yaml(cfg)}")
 
     model = instantiate(cfg.model)
     datamodule = instantiate(cfg.data)

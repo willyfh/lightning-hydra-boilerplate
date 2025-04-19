@@ -17,7 +17,7 @@ def evaluate(cfg: DictConfig) -> None:
     Args:
         cfg (DictConfig): Hydra configuration object.
     """
-    log_message("info", "Running evaluation with configuration:\n%s", OmegaConf.to_yaml(cfg))
+    log_message("info", f"Running evaluation with configuration:\n{OmegaConf.to_yaml(cfg)}")
 
     model = instantiate(cfg.model)
     datamodule = instantiate(cfg.data)
