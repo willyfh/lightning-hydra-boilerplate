@@ -5,18 +5,6 @@ defaults:
   - trainer: default
   - experiment: ???
   - params_search: null
-  - override hydra/job_logging: colorlog
-  - override hydra/hydra_logging: colorlog
+  - hydra: default
 
-hydra:
-  run:
-    dir: "outputs/train/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"
-  sweep:
-    dir: "outputs/sweeps/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"
-    subdir: ${hydra.job.override_dirname}
-  job:
-    config:
-      override_dirname:
-        exclude_keys:
-          - experiment
-          - params_search
+mode: train

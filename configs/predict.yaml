@@ -4,13 +4,9 @@ defaults:
   - data: ???
   - trainer: default
   - experiment: ???
-  - override hydra/job_logging: colorlog
-  - override hydra/hydra_logging: colorlog
+  - hydra: default
 
+mode: predict
 ckpt_path: ??? # User must override this
 data_split: "test" # one of: train, test, val, or predict
 save_format: csv # json or csv
-
-hydra:
-  run:
-    dir: "outputs/predict/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"

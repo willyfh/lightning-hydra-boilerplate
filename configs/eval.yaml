@@ -4,12 +4,8 @@ defaults:
   - data: ???
   - trainer: default
   - experiment: ???
-  - override hydra/job_logging: colorlog
-  - override hydra/hydra_logging: colorlog
+  - hydra: default
 
+mode: eval
 ckpt_path: ??? # User must override this
 data_split: "test" # one of: test or val
-
-hydra:
-  run:
-    dir: "outputs/eval/${experiment_name}-${now:%Y-%m-%d_%H-%M-%S}"
