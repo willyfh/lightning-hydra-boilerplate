@@ -183,6 +183,7 @@ addopts = [
   "--showlocals",
   "-ra",
   "--cov=src",
+  "--cov-branch",
   "--cov-report=term-missing",  # Show missing lines in terminal
   "--cov-report=xml",
 ]
