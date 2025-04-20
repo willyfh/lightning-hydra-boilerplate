@@ -161,7 +161,7 @@ Each run is timestamped for easy tracking and reproducibility. The `sweeps/` dir
 
 ## 🌱 Contributing & Feedback
 
-⚠️ I welcome contributions! If you spot any issues, have suggestions, or want to enhance the project, feel free to check the issue list, fork the repo, create a PR, or open a new issue. Your feedback is valuable in making this project more useful for everyone!
+If you spot any issues, have suggestions, or want to enhance the project, feel free to check the issue list, fork the repo, create a PR, or open a new issue. Your feedback is valuable in making this project more useful for everyone!
 
 ## 📜 License
 
