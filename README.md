@@ -1,7 +1,7 @@
 <div align="center">
 <h1> ⚡ Lightning-Hydra-Boilerplate </h1>
 
-[![python](https://img.shields.io/badge/python-3.10-blue)]() [![python](https://img.shields.io/badge/python-3.11-blue)]() [![python](https://img.shields.io/badge/python-3.12-blue)]() [![Run Tests](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/ci-checks.yaml/badge.svg)](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/ci-checks.yaml) [![MIT License](https://img.shields.io/badge/License-MIT-yellow)](https://opensource.org/licenses/MIT)
+[![python](https://img.shields.io/badge/python-3.10-blue)]() [![python](https://img.shields.io/badge/python-3.11-blue)]() [![python](https://img.shields.io/badge/python-3.12-blue)]() [![Run Tests](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/ci-checks.yaml/badge.svg)](https://github.com/willyfh/lightning-hydra-boilerplate/actions/workflows/ci-checks.yaml) [![codecov](https://codecov.io/gh/willyfh/lightning-hydra-boilerplate/graph/badge.svg?token=OGLCMT2KQ4)](https://codecov.io/gh/willyfh/lightning-hydra-boilerplate) [![MIT License](https://img.shields.io/badge/License-MIT-yellow)](https://opensource.org/licenses/MIT)
 
 </div>
 
