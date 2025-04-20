@@ -182,7 +182,6 @@ addopts = [
   "--strict-config",
   "--showlocals",
   "-ra",
-  "-s",
   "--cov=src",
   "--cov-report=term-missing",  # Show missing lines in terminal
   "--cov-report=xml",
