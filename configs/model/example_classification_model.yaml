@@ -1,5 +1,9 @@
-_target_: src.model.example_model.lightning_module.ExampleLightningModel
-num_classes: 10
+_target_: src.model.example_classification_model.lightning_module.ClassificationLitModule
+
+net:
+  _target_: src.model.example_classification_model.torch_model.ExampleClassificationCNN
+  num_classes: 10
+  dropout_rate: 0.1
 optimizer:
   _target_: torch.optim.Adam
   _partial_: true

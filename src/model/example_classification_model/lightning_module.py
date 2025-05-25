@@ -8,15 +8,13 @@ from collections.abc import Callable
 import torch
 from lightning import LightningModule
 
-from .torch_model import ExampleTorchModel
 
-
-class ExampleLightningModel(LightningModule):
+class ClassificationLitModule(LightningModule):
     """LightningModule for training, validating, and testing a classification model."""
 
     def __init__(
         self,
-        num_classes: int,
+        net: torch.nn.Module,
         optimizer: Callable,
         loss_fn: Callable,
         scheduler: Callable | None = None,
@@ -24,14 +22,14 @@ class ExampleLightningModel(LightningModule):
         """Initialize the model.
 
         Args:
-            num_classes (int): Number of output classes for the classification task.
+            net (torch.nn.Module): Torch Model instance.
             optimizer (Callable): A partial function that returns an optimizer when passed model parameters.
             loss_fn (Callable): Loss function used for training, validation, and testing.
             scheduler (Callable, optional): A scheduler function to adjust the learning rate.
 
         """
         super().__init__()
-        self.model = ExampleTorchModel(num_classes)
+        self.net = net
         self.optimizer = optimizer
         self.loss_fn = loss_fn
         self.scheduler = scheduler
@@ -45,7 +43,7 @@ class ExampleLightningModel(LightningModule):
         Returns:
             torch.Tensor: Output logits.
         """
-        return self.model(x)
+        return self.net(x)
 
     def training_step(self, batch: dict, _: int) -> torch.Tensor:
         """Run one training step.
@@ -120,7 +118,7 @@ class ExampleLightningModel(LightningModule):
             torch.optim.Optimizer | dict: The optimizer instance if no scheduler is used,
             or a dictionary containing the optimizer and scheduler if a scheduler is provided.
         """
-        optimizer = self.optimizer(self.model.parameters())
+        optimizer = self.optimizer(self.net.parameters())
 
         # If scheduler is provided, return the optimizer and scheduler
         if self.scheduler:

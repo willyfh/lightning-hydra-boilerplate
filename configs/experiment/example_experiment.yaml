@@ -1,7 +1,7 @@
 # @package _global_
 
 defaults:
-  - override /model: example_model # Override the model to use
+  - override /model: example_classification_model # Override the model to use
   - override /data: example_data # Override the data module to use
   - override /trainer: base # Override or define trainer settings
 
@@ -29,8 +29,8 @@ trainer:
         validation:
           - _target_: torchmetrics.Accuracy
             task: "multiclass"
-            num_classes: ${model.num_classes}
+            num_classes: ${model.net.num_classes}
         test:
           - _target_: torchmetrics.Accuracy
             task: "multiclass"
-            num_classes: ${model.num_classes}
+            num_classes: ${model.net.num_classes}
