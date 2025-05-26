@@ -6,11 +6,11 @@
 from lightning import LightningDataModule
 from torch.utils.data import DataLoader, random_split
 
-from .torch_dataset import ExampleTorchDataset
+from .mnist_dataset import MNISTDataset
 
 
-class ExampleDataModule(LightningDataModule):
-    """DataModule for training, validation, test, and prediction using ExampleTorchDataset."""
+class MNISTDataModule(LightningDataModule):
+    """DataModule for training, validation, test, and prediction using MNISTDataset."""
 
     def __init__(self, batch_size: int = 32, num_workers: int = 4) -> None:
         """Initialize the DataModule.
@@ -35,12 +35,12 @@ class ExampleDataModule(LightningDataModule):
                 - 'test': Load test dataset for evaluation.
                 - 'predict': Load prediction dataset for inference.
         """
-        full_train_dataset = ExampleTorchDataset(train=True)
+        full_train_dataset = MNISTDataset(train=True)
         self.train_dataset, self.val_dataset = random_split(
             full_train_dataset,
             [55000, 5000],
         )
-        self.test_dataset = ExampleTorchDataset(train=False)
+        self.test_dataset = MNISTDataset(train=False)
 
     def train_dataloader(self) -> DataLoader:
         """Return the training data loader."""
