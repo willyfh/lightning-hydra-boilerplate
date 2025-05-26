@@ -34,7 +34,7 @@ lightning-hydra-boilerplate/
 │   ├── data/
 │   │   ├── example_data.yaml
 │   ├── model/
-│   │   ├── example_model.yaml
+│   │   ├── example_classification_model.yaml
 │   ├── trainer/
 │   │   ├── base.yaml
 │   │   ├── cpu.yaml
@@ -52,10 +52,10 @@ lightning-hydra-boilerplate/
 │── src/                       # Core codebase
 │   ├── data/
 │   │   ├── example_data/
-│   │   │   ├── lightning_datamodule.py
-│   │   │   ├── torch_dataset.py
+│   │   │   ├── mnist_datamodule.py
+│   │   │   ├── mnist_dataset.py
 │   ├── model/
-│   │   ├── example_model/
+│   │   ├── example_classification_model/
 │   │   │   ├── lightning_module.py
 │   │   │   ├── torch_model.py
 │   ├── callbacks/
