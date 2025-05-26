@@ -4,6 +4,7 @@ net:
   _target_: src.model.example_classification_model.torch_model.ExampleClassificationCNN
   num_classes: 10
   dropout_rate: 0.1
+  input_channels: 1
 optimizer:
   _target_: torch.optim.Adam
   _partial_: true

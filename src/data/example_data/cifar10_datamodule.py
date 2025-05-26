@@ -1,16 +1,16 @@
 # Copyright (c) 2025 lightning-hydra-boilerplate
 # Licensed under the MIT License.
 
-"""Example of LightningDataModule implementation for managing data loading."""
+"""CIFAR-10 LightningDataModule implementation."""
 
 from lightning import LightningDataModule
 from torch.utils.data import DataLoader, random_split
 
-from .torch_dataset import ExampleTorchDataset
+from .cifar10_dataset import CIFAR10Dataset
 
 
-class ExampleDataModule(LightningDataModule):
-    """DataModule for training, validation, test, and prediction using ExampleTorchDataset."""
+class CIFAR10DataModule(LightningDataModule):
+    """DataModule for training, validation, test, and prediction using CIFAR10Dataset."""
 
     def __init__(self, batch_size: int = 32, num_workers: int = 4) -> None:
         """Initialize the DataModule.
@@ -28,19 +28,13 @@ class ExampleDataModule(LightningDataModule):
 
         Args:
             stage (str | None): One of None, 'fit', 'validate', 'test', or 'predict'.
-                This argument is unused in this implementation, but you could use it to conditionally
-                load specific datasets based on the stage of the model training or evaluation. For example:
-                - 'fit': Load the training and validation datasets.
-                - 'validate': Optionally, load validation data only.
-                - 'test': Load test dataset for evaluation.
-                - 'predict': Load prediction dataset for inference.
         """
-        full_train_dataset = ExampleTorchDataset(train=True)
+        full_train_dataset = CIFAR10Dataset(train=True)
         self.train_dataset, self.val_dataset = random_split(
             full_train_dataset,
-            [55000, 5000],
+            [45000, 5000],
         )
-        self.test_dataset = ExampleTorchDataset(train=False)
+        self.test_dataset = CIFAR10Dataset(train=False)
 
     def train_dataloader(self) -> DataLoader:
         """Return the training data loader."""
@@ -68,12 +62,7 @@ class ExampleDataModule(LightningDataModule):
         )
 
     def predict_dataloader(self) -> DataLoader:
-        """Return the data loader for making predictions.
-
-        In this simple implementation, we use the same `test_dataset` for both testing
-        and prediction purposes. This can be extended in the future to use a different
-        dataset or unlabeled data for inference if needed.
-        """
+        """Return the data loader for making predictions."""
         return DataLoader(
             self.test_dataset,
             batch_size=self.batch_size,

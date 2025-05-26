@@ -7,14 +7,15 @@ from torch.utils.data import Dataset
 from torchvision import datasets, transforms
 
 
-class ExampleTorchDataset(Dataset):
+class MNISTDataset(Dataset):
     """Custom Dataset for loading MNIST with preprocessing."""
 
-    def __init__(self, train: bool = True) -> None:
+    def __init__(self, train: bool = True, root: str = "data_temp") -> None:
         """Initialize the MNIST dataset with transforms.
 
         Args:
             train (bool): Whether to load the training or test split.
+            root (str): Path to store the dataset.
         """
         self.transform = transforms.Compose(
             [
@@ -23,7 +24,7 @@ class ExampleTorchDataset(Dataset):
             ],
         )
         self.dataset = datasets.MNIST(
-            root="data_temp",
+            root=root,
             train=train,
             download=True,
             transform=self.transform,
