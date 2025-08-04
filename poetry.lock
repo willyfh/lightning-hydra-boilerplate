@@ -530,13 +530,13 @@ toml = ["tomli ; python_full_version <= \"3.11.0a6\""]
 
 [[package]]
 name = "deepspeed"
-version = "0.17.2"
+version = "0.17.4"
 description = "DeepSpeed library"
 optional = false
 python-versions = "*"
 groups = ["main"]
 files = [
-    {file = "deepspeed-0.17.2.tar.gz", hash = "sha256:d9b636e5c7b7b3cb6d0694d145cdbb6cc97665ec8faf0180e6f7dcc4987a5251"},
+    {file = "deepspeed-0.17.4.tar.gz", hash = "sha256:d8254ce983734d14a23b8b73937338de82475b146a1bbcdf5fb4e30295e0ddb7"},
 ]
 
 [package.dependencies]
@@ -3263,4 +3263,4 @@ propcache = ">=0.2.0"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.13"
-content-hash = "41363ad17cf7dec32975ca25524b39bbe2f676f0b78870495e2aee6e15f04683"
+content-hash = "b72de964ee841c12501e9a54c148401e2fc510921e903fc1a51e04e7805f1cdb"
