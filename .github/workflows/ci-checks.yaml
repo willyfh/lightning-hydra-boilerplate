@@ -31,13 +31,22 @@ jobs:
 
       - name: Ensure lock file is up-to-date
         run: |
+          # Regenerate the lock file
           poetry lock
+      
+          # Configure git for GitHub Actions
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      
+          # Add changes if there are any
           git add poetry.lock
+      
+          # Commit changes (ignore if nothing to commit)
           git commit -m "Update poetry.lock from CI" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git HEAD:auto-update-lock-file || echo "Push failed"
-          
+      
+          # Push to the branch (create it if it doesn't exist)
+          git push --set-upstream https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git HEAD:auto-update-lock-file  
+
       - name: Install dependencies
         run: |
           poetry install --no-interaction --no-ansi
