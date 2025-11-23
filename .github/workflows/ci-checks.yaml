@@ -29,33 +29,25 @@ jobs:
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
 
-
-      - name: Check PAT_TOKEN secret
-        run: |
-          if [ -z "${{ secrets.PAT_TOKEN }}" ]; then
-            echo "PAT_TOKEN is not set!"
-            exit 1
-          else
-            echo "PAT_TOKEN is set"
-          fi
       - name: Ensure lock file is up-to-date
         run: |
-          # Regenerate the lock file
+          # Regenerate lock file
           poetry lock
       
-          # Configure git for GitHub Actions
+          # Git setup
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
       
-          # Add changes if there are any
-          git add poetry.lock
+          # Make sure branch exists
+          git checkout -B auto-update-lock-file
       
-          # Commit changes (ignore if nothing to commit)
+          # Commit changes
+          git add poetry.lock
           git commit -m "Update poetry.lock from CI" || echo "No changes to commit"
       
-          # Push to the branch (create it if it doesn't exist)
-          git push --set-upstream https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git HEAD:auto-update-lock-file  
-
+          # Push changes
+          git push --set-upstream https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git auto-update-lock-file
+          
       - name: Install dependencies
         run: |
           poetry install --no-interaction --no-ansi
