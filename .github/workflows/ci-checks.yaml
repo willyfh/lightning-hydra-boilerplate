@@ -36,7 +36,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add poetry.lock
           git commit -m "Update poetry.lock from CI" || echo "No changes to commit"
-          git push origin HEAD:${{ github.head_ref }} || echo "Push failed"
+          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git HEAD:auto-update-lock-file || echo "Push failed"
           
       - name: Install dependencies
         run: |
