@@ -31,6 +31,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          poetry lock
           poetry install --no-interaction --no-ansi
 
       - name: Run Pre-commit
