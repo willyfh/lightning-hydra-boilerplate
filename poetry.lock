@@ -1145,14 +1145,14 @@ i18n = ["Babel (>=2.7)"]
 
 [[package]]
 name = "lightning"
-version = "2.5.5"
+version = "2.5.6"
 description = "The Deep Learning framework to train, deploy, and ship AI products Lightning fast."
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "lightning-2.5.5-py3-none-any.whl", hash = "sha256:69eb248beadd7b600bf48eff00a0ec8af171ec7a678d23787c4aedf12e225e8f"},
-    {file = "lightning-2.5.5.tar.gz", hash = "sha256:4d3d66c5b1481364a7e6a1ce8ddde1777a04fa740a3145ec218a9941aed7dd30"},
+    {file = "lightning-2.5.6-py3-none-any.whl", hash = "sha256:25bb2053078c2efc57c082fda89dfbd975dfa76beb08def191947c2b571a8c8a"},
+    {file = "lightning-2.5.6.tar.gz", hash = "sha256:57b6abe87080895bc237fb7f36b7b4abaa2793760cbca00e3907e56607e0ed27"},
 ]
 
 [package.dependencies]
@@ -3251,4 +3251,4 @@ propcache = ">=0.2.0"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.13"
-content-hash = "66e9ad97a6e128487bad310f1eb1a9b37895223b77cb035002a52cc38a013bf7"
+content-hash = "856ae5e9236e20247a13ab6e99d11ec6b7294de632e5afe7f0e7a3666698155e"
